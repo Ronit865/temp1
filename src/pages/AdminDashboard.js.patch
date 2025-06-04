@@ -1,0 +1,21 @@
+<div className="detail-row"><span className="label">Name:</span> <span>{selectedEmployee ? selectedEmployee.name : ''}</span></div>
+          <div className="detail-row"><span className="label">Position:</span> <span>{selectedEmployee ? selectedEmployee.position : ''}</span></div>
+          <div className="detail-row"><span className="label">Email:</span> <span>{selectedEmployee ? selectedEmployee.email : ''}</span></div>
+          <div className="detail-row"><span className="label">Phone:</span> <span>{selectedEmployee ? selectedEmployee.phone : ''}</span></div>
+          <div className="detail-row"><span className="label">Department:</span> <span>{selectedEmployee ? selectedEmployee.department : ''}</span></div>
+          <div className="detail-row"><span className="label">Location:</span> <span>{selectedEmployee ? selectedEmployee.location : ''}</span></div>
+        </section>
+=======
+        {selectedEmployee && (
+          <div className="popup-card-overlay" onClick={handleCloseDetails}>
+            <div className="popup-card" onClick={e => e.stopPropagation()}>
+              <button className="close-button" onClick={handleCloseDetails}>×</button>
+              <h2>{selectedEmployee.name}</h2>
+              <p><strong>Position:</strong> {selectedEmployee.position}</p>
+              <p><strong>Email:</strong> {selectedEmployee.email}</p>
+              <p><strong>Phone:</strong> {selectedEmployee.phone}</p>
+              <p><strong>Department:</strong> {selectedEmployee.department}</p>
+              <p><strong>Location:</strong> {selectedEmployee.location}</p>
+            </div>
+          </div>
+        )}
