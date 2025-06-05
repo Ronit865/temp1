@@ -8,20 +8,20 @@ const adminCredentials = {
 };
 
 const employeeCredentials = [
-  { username: "Masum", password: "Masum123" },
-  { username: "Harsh", password: "Harsh123" },
-  { username: "Ronit", password: "Ronit123" },
-  { username: "Sumit", password: "Sumit123" },
-  { username: "Veer", password: "Veer123" },
-  { username: "Jamin", password: "Jamin123" },
-  { username: "Monil", password: "Monil123" },
-  { username: "Rahil", password: "Rahil123" },
-  { username: "Ayush", password: "Ayush123" },
-  { username: "Dip", password: "Dip123" }
+  { joiningDate: "2022-01-15", password: "Masum123" },
+  { joiningDate: "2021-06-20", password: "Harsh123" },
+  { joiningDate: "2020-11-05", password: "Ronit123" },
+  { joiningDate: "2019-08-12", password: "Sumit123" },
+  { joiningDate: "2023-03-01", password: "Veer123" },
+  { joiningDate: "2022-07-18", password: "Jamin123" },
+  { joiningDate: "2021-12-30", password: "Monil123" },
+  { joiningDate: "2020-04-25", password: "Rahil123" },
+  { joiningDate: "2019-09-10", password: "Ayush123" },
+  { joiningDate: "2023-02-14", password: "Dip123" }
 ];
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [joiningDate, setJoiningDate] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("employee");
   const navigate = useNavigate();
@@ -29,10 +29,10 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (username && password) {
+    if ((role === "admin" && joiningDate && password) || (role === "employee" && joiningDate && password)) {
       if (role === "admin") {
-        if (username === adminCredentials.username && password === adminCredentials.password) {
-          localStorage.setItem("loggedInUser", username);
+        if (joiningDate === adminCredentials.username && password === adminCredentials.password) {
+          localStorage.setItem("loggedInUser", joiningDate);
           localStorage.setItem("role", "admin");
           navigate("/admin");
         } else {
@@ -40,10 +40,10 @@ export default function Login() {
         }
       } else if (role === "employee") {
         const validEmployee = employeeCredentials.find(
-          (emp) => emp.username === username && emp.password === password
+          (emp) => emp.joiningDate === joiningDate && emp.password === password
         );
         if (validEmployee) {
-          localStorage.setItem("loggedInUser", username);
+          localStorage.setItem("loggedInUser", joiningDate);
           localStorage.setItem("role", "employee");
           navigate("/employee");
         } else {
@@ -59,17 +59,30 @@ export default function Login() {
     <div className="container-center">
       <form onSubmit={handleLogin} className="form-card" noValidate>
         <h2>Login</h2>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            type="text"
-            required
-          />
-        </div>
+        {role === "employee" ? (
+          <div className="form-group">
+            <label htmlFor="joiningDate">Joining Date</label>
+            <input
+              id="joiningDate"
+              type="date"
+              value={joiningDate}
+              onChange={(e) => setJoiningDate(e.target.value)}
+              required
+            />
+          </div>
+        ) : (
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              placeholder="Enter your username"
+              value={joiningDate}
+              onChange={(e) => setJoiningDate(e.target.value)}
+              type="text"
+              required
+            />
+          </div>
+        )}
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input

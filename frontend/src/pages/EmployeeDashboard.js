@@ -4,16 +4,16 @@ import { jsPDF } from 'jspdf';
 import '../styles.css';
 
 const mockEmployees = [
-  { id: 1, username: 'Masum', name: 'Masum Deasi', position: 'Software Engineer', email: 'Masum.Desai@Gmail.com', phone: '8320331941', department: 'Engineering', location: 'Navsari' },
-  { id: 2, username: 'Harsh', name: 'Harsh Jadhav', position: 'Product Manager', email: 'bob.smith@example.com', phone: '555-2345', department: 'Product', location: 'San Francisco' },
-  { id: 3, username: 'Ronit', name: 'Ronit Dhimmar', position: 'UX Designer', email: 'charlie.brown@example.com', phone: '555-3456', department: 'Design', location: 'Boston' },
-  { id: 4, username: 'Sumit', name: 'Sumit Malkani', position: 'QA Engineer', email: 'diana.prince@example.com', phone: '555-4567', department: 'Quality Assurance', location: 'Seattle' },
-  { id: 5, username: 'Veer', name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'ethan.hunt@example.com', phone: '555-5678', department: 'Operations', location: 'Austin' },
-  { id: 6, username: 'Jami', name: 'Jamin Mali', position: 'Security Analyst', email: 'fiona.glenanne@example.com', phone: '555-6789', department: 'Security', location: 'Chicago' },
-  { id: 7, username: 'Monil', name: 'Monil Patel', position: 'Business Analyst', email: 'george.bailey@example.com', phone: '555-7890', department: 'Business', location: 'Denver' },
-  { id: 8, username: 'Rahil', name: 'Rahil Patel', position: 'HR Manager', email: 'hannah.wells@example.com', phone: '555-8901', department: 'Human Resources', location: 'Miami' },
-  { id: 9, username: 'Ayush', name: 'Ayush More', position: 'Technical Writer', email: 'ian.fleming@example.com', phone: '555-9012', department: 'Documentation', location: 'Portland' },
-  { id: 10, username: 'Dip', name: 'Dip basopia', position: 'Marketing Specialist', email: 'jane.doe@example.com', phone: '555-0123', department: 'Marketing', location: 'Los Angeles' },
+  { id: 1, joiningDate: "2022-01-15", username: 'Masum', name: 'Masum Deasi', position: 'Software Engineer', email: 'Masum.Desai@Gmail.com', phone: '8320331941', department: 'Engineering', location: 'Navsari' },
+  { id: 2, joiningDate: "2021-06-20", username: 'Harsh', name: 'Harsh Jadhav', position: 'Product Manager', email: 'bob.smith@example.com', phone: '555-2345', department: 'Product', location: 'San Francisco' },
+  { id: 3, joiningDate: "2020-11-05", username: 'Ronit', name: 'Ronit Dhimmar', position: 'UX Designer', email: 'charlie.brown@example.com', phone: '555-3456', department: 'Design', location: 'Boston' },
+  { id: 4, joiningDate: "2019-08-12", username: 'Sumit', name: 'Sumit Malkani', position: 'QA Engineer', email: 'diana.prince@example.com', phone: '555-4567', department: 'Quality Assurance', location: 'Seattle' },
+  { id: 5, joiningDate: "2023-03-01", username: 'Veer', name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'ethan.hunt@example.com', phone: '555-5678', department: 'Operations', location: 'Austin' },
+  { id: 6, joiningDate: "2022-07-18", username: 'Jami', name: 'Jamin Mali', position: 'Security Analyst', email: 'fiona.glenanne@example.com', phone: '555-6789', department: 'Security', location: 'Chicago' },
+  { id: 7, joiningDate: "2021-12-30", username: 'Monil', name: 'Monil Patel', position: 'Business Analyst', email: 'george.bailey@example.com', phone: '555-7890', department: 'Business', location: 'Denver' },
+  { id: 8, joiningDate: "2020-04-25", username: 'Rahil', name: 'Rahil Patel', position: 'HR Manager', email: 'hannah.wells@example.com', phone: '555-8901', department: 'Human Resources', location: 'Miami' },
+  { id: 9, joiningDate: "2019-09-10", username: 'Ayush', name: 'Ayush More', position: 'Technical Writer', email: 'ian.fleming@example.com', phone: '555-9012', department: 'Documentation', location: 'Portland' },
+  { id: 10, joiningDate: "2023-02-14", username: 'Dip', name: 'Dip basopia', position: 'Marketing Specialist', email: 'jane.doe@example.com', phone: '555-0123', department: 'Marketing', location: 'Los Angeles' },
 ];
 
 export default function EmployeeDashboard() {
@@ -27,7 +27,7 @@ export default function EmployeeDashboard() {
       navigate('/');
       return;
     }
-    const emp = mockEmployees.find(e => e.username === loggedInUser);
+    const emp = mockEmployees.find(e => e.joiningDate === loggedInUser);
     setEmployee(emp || null);
   }, [navigate]);
 

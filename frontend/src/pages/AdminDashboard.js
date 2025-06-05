@@ -6,16 +6,16 @@ import {
 import { FaTachometerAlt, FaUsers, FaCalendarCheck, FaFileAlt, FaMoneyCheckAlt, FaChartBar, FaCog } from 'react-icons/fa';
 
 const mockEmployees = [
-  { id: 1, username: 'Masum', name: 'Masum Deasi', position: 'Software Engineer', email: 'alice.johnson@example.com', phone: '555-1234', department: 'Engineering', location: 'New York' },
-  { id: 2, username: 'Harsh', name: 'Harsh Jadhav', position: 'Product Manager', email: 'bob.smith@example.com', phone: '555-2345', department: 'Product', location: 'San Francisco' },
-  { id: 3, username: 'Ronit', name: 'Ronit Dhimmar', position: 'UX Designer', email: 'charlie.brown@example.com', phone: '555-3456', department: 'Design', location: 'Boston' },
-  { id: 4, username: 'Sumit', name: 'Sumit Malkani', position: 'QA Engineer', email: 'diana.prince@example.com', phone: '555-4567', department: 'Quality Assurance', location: 'Seattle' },
-  { id: 5, username: 'Veer', name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'ethan.hunt@example.com', phone: '555-5678', department: 'Operations', location: 'Austin' },
-  { id: 6, username: 'Jami', name: 'Jamin Mali', position: 'Security Analyst', email: 'fiona.glenanne@example.com', phone: '555-6789', department: 'Security', location: 'Chicago' },
-  { id: 7, username: 'Monil', name: 'Monil Patel', position: 'Business Analyst', email: 'george.bailey@example.com', phone: '555-7890', department: 'Business', location: 'Denver' },
-  { id: 8, username: 'Rahil', name: 'Rahil Patel', position: 'HR Manager', email: 'hannah.wells@example.com', phone: '555-8901', department: 'Human Resources', location: 'Miami' },
-  { id: 9, username: 'Ayush', name: 'Ayush More', position: 'Technical Writer', email: 'ian.fleming@example.com', phone: '555-9012', department: 'Documentation', location: 'Portland' },
-  { id: 10, username: 'Dip', name: 'Dip basopia', position: 'Marketing Specialist', email: 'jane.doe@example.com', phone: '555-0123', department: 'Marketing', location: 'Los Angeles' },
+  { id: 1, username: 'Masum', name: 'Masum Deasi', position: 'Software Engineer', email: 'masum.deasi@gmail.com', phone: '+91 9123456789', department: 'Engineering', location: 'Mumbai', joiningDate: '2020-01-15' },
+  { id: 2, username: 'Harsh', name: 'Harsh Jadhav', position: 'Product Manager', email: 'harsh.jadhav@gmail.com', phone: '+91 9234567890', department: 'Product', location: 'Delhi', joiningDate: '2019-03-22' },
+  { id: 3, username: 'Ronit', name: 'Ronit Dhimmar', position: 'UX Designer', email: 'ronit.dhimmar@gmail.com', phone: '+91 9345678901', department: 'Design', location: 'Bangalore', joiningDate: '2021-07-10' },
+  { id: 4, username: 'Sumit', name: 'Sumit Malkani', position: 'QA Engineer', email: 'sumit.malkani@gmail.com', phone: '+91 9456789012', department: 'Quality Assurance', location: 'Chennai', joiningDate: '2018-11-05' },
+  { id: 5, username: 'Veer', name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'veer.kshatriya@gmail.com', phone: '+91 9567890123', department: 'Operations', location: 'Hyderabad', joiningDate: '2020-06-18' },
+  { id: 6, username: 'Jami', name: 'Jamin Mali', position: 'Security Analyst', email: 'jamin.mali@gmail.com', phone: '+91 9678901234', department: 'Security', location: 'Pune', joiningDate: '2019-09-30' },
+  { id: 7, username: 'Monil', name: 'Monil Patel', position: 'Business Analyst', email: 'monil.patel@gmail.com', phone: '+91 9789012345', department: 'Business', location: 'Ahmedabad', joiningDate: '2021-01-12' },
+  { id: 8, username: 'Rahil', name: 'Rahil Patel', position: 'HR Manager', email: 'rahil.patel@gmail.com', phone: '+91 9890123456', department: 'Human Resources', location: 'Kolkata', joiningDate: '2017-04-25' },
+  { id: 9, username: 'Ayush', name: 'Ayush More', position: 'Technical Writer', email: 'ayush.more@gmail.com', phone: '+91 9901234567', department: 'Documentation', location: 'Surat', joiningDate: '2020-10-01' },
+  { id: 10, username: 'Dip', name: 'Dip basopia', position: 'Marketing Specialist', email: 'dip.basopia@gmail.com', phone: '+91 9012345678', department: 'Marketing', location: 'Jaipur', joiningDate: '2018-08-14' },
 ];
 
 const attendanceData = [
@@ -287,6 +287,7 @@ export default function AdminDashboard() {
               <p><strong>Phone:</strong> {selectedEmployee.phone}</p>
               <p><strong>Department:</strong> {selectedEmployee.department}</p>
               <p><strong>Location:</strong> {selectedEmployee.location}</p>
+              <p><strong>Joining Date:</strong> {selectedEmployee.joiningDate}</p>
             </div>
           </div>
         )}
