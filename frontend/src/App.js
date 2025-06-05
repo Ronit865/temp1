@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import Login from "./components/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import EmployeeDashboard from "./pages/EmployeeDashboard";
+import Register from "./components/register";
+
 function AppWrapper() {
   const location = useLocation();
 
@@ -13,6 +15,7 @@ function AppWrapper() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/employee" element={<EmployeeDashboard />} />
         <Route path="/testchart" element={<AdminDashboard />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );
