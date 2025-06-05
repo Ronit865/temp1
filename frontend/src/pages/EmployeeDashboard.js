@@ -10,12 +10,12 @@ const mockEmployees = [
   { id: 1, joiningDate: "2022-08-08", name: 'Masum Deasi', position: 'Software Engineer', email: 'Masum.Desai@Gmail.com', phone: '8320331941', department: 'Engineering', location: 'Navsari' },
   { id: 3, joiningDate: "2020-11-05", name: 'Ronit Dhimmar', position: 'UX Designer', email: 'charlie.brown@example.com', phone: '555-3456', department: 'Design', location: 'Boston' },
   { id: 4, joiningDate: "2019-08-12", name: 'Sumit Malkani', position: 'QA Engineer', email: 'diana.prince@example.com', phone: '555-4567', department: 'Quality Assurance', location: 'Seattle' },
-  { id: 5, joiningDate: "2023-03-01",name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'ethan.hunt@example.com', phone: '555-5678', department: 'Operations', location: 'Austin' },
-  { id: 6, joiningDate: "2022-07-18",name: 'Jamin Mali', position: 'Security Analyst', email: 'fiona.glenanne@example.com', phone: '555-6789', department: 'Security', location: 'Chicago' },
+  { id: 5, joiningDate: "2023-03-01", name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'ethan.hunt@example.com', phone: '555-5678', department: 'Operations', location: 'Austin' },
+  { id: 6, joiningDate: "2022-07-18", name: 'Jamin Mali', position: 'Security Analyst', email: 'fiona.glenanne@example.com', phone: '555-6789', department: 'Security', location: 'Chicago' },
   { id: 7, joiningDate: "2021-12-30", name: 'Monil Patel', position: 'Business Analyst', email: 'george.bailey@example.com', phone: '555-7890', department: 'Business', location: 'Denver' },
   { id: 8, joiningDate: "2020-04-25", name: 'Rahil Patel', position: 'HR Manager', email: 'hannah.wells@example.com', phone: '555-8901', department: 'Human Resources', location: 'Miami' },
   { id: 9, joiningDate: "2019-09-10", name: 'Ayush More', position: 'Technical Writer', email: 'ian.fleming@example.com', phone: '555-9012', department: 'Documentation', location: 'Portland' },
-  { id: 10, joiningDate: "2023-02-14",name: 'Dip basopia', position: 'Marketing Specialist', email: 'jane.doe@example.com', phone: '555-0123', department: 'Marketing', location: 'Los Angeles' },
+  { id: 10, joiningDate: "2023-02-14", name: 'Dip basopia', position: 'Marketing Specialist', email: 'jane.doe@example.com', phone: '555-0123', department: 'Marketing', location: 'Los Angeles' },
 ];
 
 const projectProgressData = [
@@ -55,6 +55,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 export default function EmployeeDashboard() {
   const [employee, setEmployee] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -95,6 +96,19 @@ export default function EmployeeDashboard() {
     doc.text('Date: ' + new Date().toLocaleDateString(), 20, 160);
     doc.text('Authorized Signature', 150, 160);
     doc.line(140, 165, 190, 165); // signature line
+    return doc;
+  };
+
+  const [showPreview, setShowPreview] = useState(false);
+
+  const generatePreview = () => {
+    if (!employee) return;
+    setShowPreview(true);
+  };
+
+  const handleDownloadClick = () => {
+    if (!employee) return;
+    const doc = generateCertificate();
     doc.save(`${employee.name}_Internship_Certificate.pdf`);
   };
 
@@ -131,54 +145,7 @@ export default function EmployeeDashboard() {
           </div>
         </header>
         <main className="dashboard-main-content">
-          <section className="top-cards">
-            <div className="card project-progress">
-              <h3>Project Progress</h3>
-              <p className="large-number">2374</p>
-              <p>Customer Satisfaction</p>
-              <button className="btn btn-toggle">Toggle</button>
-            </div>
-            <div className="card metrics">
-              <h3>Metrics</h3>
-              <p>Customer Satisfaction</p>
-              <button className="btn btn-toggle">Toggle</button>
-            </div>
-            <div className="card team-progress">
-              <h3>Team Progress</h3>
-              <PieChart width={150} height={150}>
-                <Pie
-                  data={teamProgressData}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={60}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label
-                >
-                  {teamProgressData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </div>
-            <div className="card calendar">
-              <h3>Calendar</h3>
-              <table className="calendar-table">
-                <thead>
-                  <tr>
-                    <th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
-                  <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
-                  <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
-                  <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
-                  <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
+
 
           <section className="employee-details-cards">
             <h3>Employee Details</h3>
@@ -213,24 +180,48 @@ export default function EmployeeDashboard() {
               </div>
             </div>
           </section>
-
-          <button className="btn btn-primary" style={{ marginTop: '20px' }} onClick={generateCertificate}>
-            Download Internship Certificate
-          </button>
-
           <section className="charts-section">
-            <div className="line-chart-container">
-              <h3>Project Progress</h3>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={projectProgressData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="uv" stroke="#2962ff" />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
+            {/* Certificate preview card moved outside employee details */}
+            <section className="certificate-preview-section">
+              <div className="card employee-card certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px 12rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <button className="btn btn-secondary" onClick={generatePreview}>
+                    Preview Certificate
+                  </button>
+                  <button className="btn btn-primary" onClick={handleDownloadClick}>
+                    Download Internship Certificate
+                  </button>
+                </div>
+              </div>
+              <div className='Priviewcard'>
+
+                {showPreview ? (
+                  <div className="certificate-preview" >
+                    <h1 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: '16px' }}>Internship Certificate</h1>
+                    <p style={{ fontSize: '10px', marginBottom: '10px' }}>This is to certify that</p>
+                    <p style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'center' }}>{employee.name}</p>
+                    <p style={{ fontSize: '10px', marginBottom: '10px', textAlign: 'center' }}>has successfully completed the internship as a</p>
+                    <p style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'center' }}>{employee.position}</p>
+                    <p style={{ fontSize: '9px', marginBottom: '5px' }}>Joining Date: <strong>{employee.joiningDate}</strong></p>
+                    <p style={{ fontSize: '9px', marginBottom: '5px' }}>Department: <strong>{employee.department}</strong></p>
+                    <p style={{ fontSize: '9px', marginTop: '15px', marginBottom: '15px' }}>We wish them all the best in their future endeavors.</p>
+                    <p style={{ fontSize: '9px' }}>Date: <strong>{new Date().toLocaleDateString()}</strong></p>
+                    <p style={{ textAlign: 'right', marginTop: '30px', fontSize: '9px' }}>
+                      Authorized Signature<br />
+                      <span style={{ display: 'inline-block', borderBottom: '1px solid #000', width: '75px', marginTop: '3px' }}></span>
+                    </p>
+                  </div>
+                ) : (
+                  <p>Preview will be shown here</p>
+                )}
+              </div>
+            </section>
+
+
+
+
+          </section>
+          <section className="bottom-section">
             <div className="bar-chart-container">
               <h3>Weekly Activity</h3>
               <ResponsiveContainer width="100%" height={200}>
@@ -243,12 +234,6 @@ export default function EmployeeDashboard() {
                   <Bar dataKey="pv" fill="#82ca9d" />
                 </BarChart>
               </ResponsiveContainer>
-            </div>
-          </section>
-          <section className="bottom-section">
-            <div className="performance-summary">
-              <h3>Performance Summary</h3>
-              <p>Some performance details here...</p>
             </div>
             <div className="employee-status-table">
               <h3>Performance Chart</h3>
