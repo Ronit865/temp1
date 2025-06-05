@@ -111,17 +111,8 @@ button:hover {
 
 .page-main {
   flex-grow: 1;
-  max-width: 900px;
-  margin: 2rem auto;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(26, 35, 126, 0.1);
-  padding: 2rem 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  background: transparent;
 }
-
 .btn {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
@@ -545,6 +536,11 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
+  background-color: white;
+  font-weight: bold;
+  padding: 1rem 3rem;
+  border-radius: 12px;
+  color: #2962ff;
 }
 
 .top-bar-search-input {

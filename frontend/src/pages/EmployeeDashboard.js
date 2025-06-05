@@ -125,25 +125,45 @@ export default function EmployeeDashboard() {
     <div className="page-container">
       <main className="page-main">
         {employee ? (
-          <section className="employee-full-display">
-            <div className="employee-details-no-card">
-              <h2>{employee.name}</h2>
-              <div className="employee-details-row-no-card">
-                <span><strong>Position:</strong> {employee.position}</span>
-                <span><strong>Email:</strong> {employee.email}</span>
-              </div>
-              <div className="employee-details-row-no-card">
-                <span><strong>Phone:</strong> {employee.phone}</span>
-                <span><strong>Department:</strong> {employee.department}</span>
-              </div>
-              <div className="employee-details-row-no-card">
-                <span><strong>Location:</strong> {employee.location}</span>
-              </div>
-              <button className="btn btn-primary" onClick={() => {
-                generatePDF();
-              }}>Download PDF</button>
+          <>
+            <div className="top-bar">
+              <div className="welcome-text">Welcome {employee.name}</div>
+              <button className="btn btn-logout" onClick={handleLogout}>Logout</button>
             </div>
-          </section>
+            <section className="employee-full-display">
+              <div className="employee-details">
+                <h2>{employee.name}</h2>
+                <div className="employee-card">
+                  <div className="employee-details-row">
+                    <span><strong>Position:</strong> {employee.position}</span>
+                  </div>
+                </div>
+                <div className="employee-card">
+                  <div className="employee-details-row">
+                    <span><strong>Email:</strong> {employee.email}</span>
+                  </div>
+                </div>
+                <div className="employee-card">
+                  <div className="employee-details-row">
+                    <span><strong>Phone:</strong> {employee.phone}</span>
+                  </div>
+                </div>
+                 <div className="employee-card">
+                  <div className="employee-details-row">
+                    <span><strong>Department:</strong> {employee.department}</span>
+                  </div>
+                </div>
+                <div className="employee-card">
+                  <div className="employee-details-row">
+                    <span><strong>Location:</strong> {employee.location}</span>
+                  </div>
+                </div>
+                <button className="btn btn-primary" onClick={() => {
+                  generatePDF();
+                }}>Download PDF</button>
+              </div>
+            </section>
+          </>
         ) : (
           <p>No employee details found. Please log in.</p>
         )}
