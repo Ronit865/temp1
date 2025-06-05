@@ -7,7 +7,7 @@ import '../EmployeeDashboardStyles.css';
 
 const mockEmployees = [
   { id: 2, joiningDate: "2021-06-20", name: 'Harsh Jadhav', position: 'Product Manager', email: 'bob.smith@example.com', phone: '555-2345', department: 'Product', location: 'San Francisco' },
-  { id: 1, joiningDate: "2022-08-08", name: 'Masum Deasi', position: 'Software Engineer', email: 'Masum.Desai@Gmail.com', phone: '8320331941', department: 'Engineering', location: 'Navsari' },
+  { id: 1, joiningDate: "2022-08-08", name: 'Masum Desai', position: 'Software Engineer', email: 'Masum.Desai@Gmail.com', phone: '8320331941', department: 'Engineering', location: 'Navsari' },
   { id: 3, joiningDate: "2020-11-05", name: 'Ronit Dhimmar', position: 'UX Designer', email: 'charlie.brown@example.com', phone: '555-3456', department: 'Design', location: 'Boston' },
   { id: 4, joiningDate: "2019-08-12", name: 'Sumit Malkani', position: 'QA Engineer', email: 'diana.prince@example.com', phone: '555-4567', department: 'Quality Assurance', location: 'Seattle' },
   { id: 5, joiningDate: "2023-03-01", name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'ethan.hunt@example.com', phone: '555-5678', department: 'Operations', location: 'Austin' },
@@ -183,7 +183,7 @@ export default function EmployeeDashboard() {
           <section className="charts-section">
             {/* Certificate preview card moved outside employee details */}
             <section className="certificate-preview-section">
-              <div className="card employee-card certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px 12rem' }}>
+              <div className="card employee-card certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 12rem', margin:'-6px 0' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <button className="btn btn-secondary" onClick={generatePreview}>
                     Preview Certificate

@@ -6,7 +6,7 @@ import {
 import { FaTachometerAlt, FaUsers, FaCalendarCheck, FaFileAlt, FaMoneyCheckAlt, FaChartBar, FaCog } from 'react-icons/fa';
 
 const mockEmployees = [
-  { id: 1, username: 'Masum', name: 'Masum Deasi', position: 'Software Engineer', email: 'masum.deasi@gmail.com', phone: '+91 9123456789', department: 'Engineering', location: 'Mumbai', joiningDate: '2020-01-15' },
+  { id: 1, username: 'Masum', name: 'Masum Desai', position: 'Software Engineer', email: 'masum.deasi@gmail.com', phone: '+91 9123456789', department: 'Engineering', location: 'Mumbai', joiningDate: '2020-01-15' },
   { id: 2, username: 'Harsh', name: 'Harsh Jadhav', position: 'Product Manager', email: 'harsh.jadhav@gmail.com', phone: '+91 9234567890', department: 'Product', location: 'Delhi', joiningDate: '2019-03-22' },
   { id: 3, username: 'Ronit', name: 'Ronit Dhimmar', position: 'UX Designer', email: 'ronit.dhimmar@gmail.com', phone: '+91 9345678901', department: 'Design', location: 'Bangalore', joiningDate: '2021-07-10' },
   { id: 4, username: 'Sumit', name: 'Sumit Malkani', position: 'QA Engineer', email: 'sumit.malkani@gmail.com', phone: '+91 9456789012', department: 'Quality Assurance', location: 'Chennai', joiningDate: '2018-11-05' },
@@ -50,7 +50,7 @@ const recentActivities = [
 ];
 
 const employeeStatus = [
-  { id: 1, name: 'Masum Deasi', position: 'Software Engineer', status: 'Active' },
+  { id: 1, name: 'Masum Desai', position: 'Software Engineer', status: 'Active' },
   { id: 2, name: 'Harsh Jadhav', position: 'Product Manager', status: 'Active' },
   { id: 3, name: 'Ronit Dhimmar', position: 'UX Designer', status: 'On Leave' },
   { id: 4, name: 'Sumit Malkani', position: 'QA Engineer', status: 'Active' },
