@@ -10,7 +10,8 @@ function AppWrapper() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/employee" element={<EmployeeDashboard />} />
+        {/* <Route path="/employee" element={<EmployeeDashboard />} /> */}
+        <Route path="/testchart" element={<AdminDashboard />} />
       </Routes>
     </>
   );
