@@ -1,3 +1,4 @@
+import './styles.css';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Login from "./components/Login";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -10,7 +11,7 @@ function AppWrapper() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        {/* <Route path="/employee" element={<EmployeeDashboard />} /> */}
+        <Route path="/employee" element={<EmployeeDashboard />} />
         <Route path="/testchart" element={<AdminDashboard />} />
       </Routes>
     </>

@@ -177,7 +177,61 @@ button:hover {
   gap: 1.5rem;
 }
 
+.employee-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(26, 35, 126, 0.15);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.8rem;
+  color: #2962ff;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.employee-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.info-card {
+  background: #f0f4ff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(41, 98, 255, 0.1);
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.info-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2962ff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 1rem;
+  color: #1a237e;
+}
+
 /* Added styles for AdminDashboard sidebar */
+
+.sidebar-employee-label {
+  font-weight: 700;
+  padding: 8px 0;
+  margin-bottom: 10px;
+}
 
 .dashboard-container {
   padding: 20px;
@@ -193,7 +247,7 @@ button:hover {
   width: 280px;
   background-color: #ffffff;
   border-right: 1px solid #ddd;
-  padding: 15px;
+  padding: 40px 15px 15px 15px; /* increased top padding to avoid overlap with toggle button */
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
@@ -264,10 +318,12 @@ button:hover {
 .modal-overlay {
   position: fixed;
   top: 0;
-  /* left: 280px; offset to the right of sidebar */
+  left: 0; /* override left to 0 to ignore sidebar width */
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -307,6 +363,7 @@ button:hover {
   width: 320px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   position: relative;
+  margin: auto; /* center horizontally */
 }
 
 .modal-close-button {
@@ -332,6 +389,60 @@ button:hover {
   color: white;
 }
 
+/* New styles for EmployeeDashboard redesign */
+
+.employee-details-no-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 30px;
+  color: #1a237e;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.employee-details-no-card h2 {
+  margin: 0 0 20px 0;
+  color: #2962ff;
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.employee-details-row-no-card {
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
+}
+
+.employee-details-row-no-card span {
+  flex: 1;
+  text-align: center;
+}
+
+.employee-details-no-card button {
+  align-self: center;
+  max-width: 200px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  background: linear-gradient(45deg, #2962ff, #1a237e);
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.employee-details-no-card button:hover {
+  background: linear-gradient(45deg, #1a237e, #2962ff);
+}
+
 .dashboard-content {
   display: flex;
   height: 100vh;
@@ -343,15 +454,51 @@ button:hover {
   background-color: #ffffff;
   border-right: 1px solid #ddd;
   padding: 15px;
+  padding-top: 55px;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar-header {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #2962ff;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar-search-input {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.sidebar-employee-list {
+  max-height: 400px; /* increased height to make list longer */
+  overflow-y: auto;
+  border-top: 1px solid #eee;
+  padding-top: 5px;
+}
+
+.sidebar-employee-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-employee-item {
+  padding: 6px 8px;
+  cursor: pointer;
+  color: #4c1d95;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-employee-item:hover {
+  background-color: #e0d7f5;
 }
 
 .sidebar.open {
@@ -445,7 +592,7 @@ button:hover {
 
 .user-avatar {
   border-radius: 50%;
-  width: 40px;
+  width: 60px;
   height: 40px;
 }
 
@@ -712,4 +859,34 @@ button:hover {
 
 .modal-close-button:hover {
   color: white;
+}
+.sidebar-toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  box-sizing: content-box;
+  background-color: rgba(0,0,0,0.1); /* temporary for visibility */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1001;
+}
+
+.hamburger-line {
+width: 30px;
+height: 3px;
+background-color: #4c1d95;
+border-radius: 2px;
+transition: background-color 0.3s ease;
+display: block;
+}
+
+.sidebar-toggle-button:hover .hamburger-line {
+background-color: #2962ff;
 }

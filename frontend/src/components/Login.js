@@ -8,7 +8,7 @@ const adminCredentials = {
 };
 
 const employeeCredentials = [
-  { joiningDate: "2022-01-15", password: "Masum123" },
+  { joiningDate: "2022-08-08", password: "Masum123" },
   { joiningDate: "2021-06-20", password: "Harsh123" },
   { joiningDate: "2020-11-05", password: "Ronit123" },
   { joiningDate: "2019-08-12", password: "Sumit123" },
@@ -65,6 +65,7 @@ export default function Login() {
             <input
               id="joiningDate"
               type="date"
+              placeholder="yyyy-mm-dd"
               value={joiningDate}
               onChange={(e) => setJoiningDate(e.target.value)}
               required

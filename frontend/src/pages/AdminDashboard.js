@@ -83,44 +83,44 @@ export default function AdminDashboard() {
 
       {/* Sidebar */}
       <aside className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
-        <button className="sidebar-toggle-button" onClick={toggleSidebar}>
-          {isSidebarOpen ? '<<' : '>>'}
+        <button className="sidebar-toggle-button" onClick={toggleSidebar} aria-label="Toggle sidebar">
+          <div className="hamburger-line"></div>
+          <div className="hamburger-line"></div>
+          <div className="hamburger-line"></div>
         </button>
         <div className="sidebar-header">
-          {isSidebarOpen ? <h2>Admin Dashboard</h2> : <FaTachometerAlt size={24} color="#2962ff" />}
+          {isSidebarOpen ? (
+            <>
+              <div className="sidebar-employee-label">Employees</div>
+              <input
+                type="text"
+                placeholder="Search employees..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="sidebar-search-input"
+              />
+              <div className="sidebar-employee-list">
+                {filteredEmployees.length > 0 ? (
+                  <ul>
+                    {filteredEmployees.map(employee => (
+                      <li
+                        key={employee.id}
+                        onClick={() => handleEmployeeClick(employee)}
+                        className="sidebar-employee-item"
+                      >
+                        {employee.name}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No employees found.</p>
+                )}
+              </div>
+            </>
+          ) : (
+            <FaTachometerAlt size={24} color="#2962ff" />
+          )}
         </div>
-        <nav className="sidebar-nav">
-          <ul>
-            <li className="active">
-              <FaTachometerAlt size={20} color="#4c1d95" />
-              {isSidebarOpen && 'Dashboard'}
-            </li>
-            <li>
-              <FaUsers size={20} color="#4c1d95" />
-              {isSidebarOpen && 'Employees'}
-            </li>
-            <li>
-              <FaCalendarCheck size={20} color="#4c1d95" />
-              {isSidebarOpen && 'Attendance'}
-            </li>
-            <li>
-              <FaFileAlt size={20} color="#4c1d95" />
-              {isSidebarOpen && 'Leave Requests'}
-            </li>
-            <li>
-              <FaMoneyCheckAlt size={20} color="#4c1d95" />
-              {isSidebarOpen && 'Payroll'}
-            </li>
-            <li>
-              <FaChartBar size={20} color="#4c1d95" />
-              {isSidebarOpen && 'Reports'}
-            </li>
-            <li>
-              <FaCog size={20} color="#4c1d95" />
-              {isSidebarOpen && 'Settings'}
-            </li>
-          </ul>
-        </nav>
       </aside>
 
       {/* Main Content */}
@@ -133,7 +133,7 @@ export default function AdminDashboard() {
           </div>
           <div className="top-bar-right">
             <div className="user-profile" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <img src="https://imgs.search.brave.com/3LNY8EAoZ9NxPI12gLrIcVphojpIvtU_bI9qLxDnUoI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS12ZWN0b3Iv/Ymx1ZS1jaXJjbGUt/d2l0aC13aGl0ZS11/c2VyXzc4MzcwLTQ3/MDcuanBnP3NlbXQ9/YWlzX2h5YnJyaWQmdz03NDA" alt="User Avatar" className="user-avatar" />
+              <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png" alt="User Avatar" className="user-avatar" />
               <span className="user-name">Admin</span>
             </div>
           </div>
@@ -238,9 +238,9 @@ export default function AdminDashboard() {
         </section>
 
         {/* Employee Search Sidebar */}
-        <aside className={`employee-search-sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+        {/* <aside className={`employee-search-sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
           <button className="sidebar-toggle-button" onClick={toggleSidebar}>
-            {isSidebarOpen ? '<<' : '>>'}
+            {isSidebarOpen ? '' : ''}
           </button>
           <div className="search-bar-container">
             <div className="search-input-wrapper">
@@ -274,7 +274,7 @@ export default function AdminDashboard() {
               )}
             </ul>
           </div>
-        </aside>
+        </aside> */}
 
         {/* Employee Details Modal */}
         {selectedEmployee && (
