@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  padding: 0 0 0 0;
+  font-family: "Poppins", sans-serif;
   background-color: #e8f0fe; /* light blue background */
   color: #1a237e; /* dark blue text */
 }
@@ -20,22 +21,26 @@ body {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(26, 35, 126, 0.2);
-  width: 320px;
-  max-width: 100%;
+  width: 35vw;
+  /* max-width: 100%; */
   display: flex;
   flex-direction: column;
   gap: 1rem;
   box-sizing: border-box;
+  /* height: 117vh; */
+  /* margin-top: 12rem; */
 }
 
-h2, h1 {
+h2,
+h1 {
   font-weight: 600;
   margin: 0 0 1rem 0;
   color: #2962ff; /* bright blue heading */
   text-align: center;
 }
 
-input, select {
+input,
+select {
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -56,7 +61,8 @@ label {
   color: #1a237e;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: #2962ff; /* vibrant blue */
   box-shadow: 0 0 8px rgba(41, 98, 255, 0.4);
@@ -87,7 +93,7 @@ button:hover {
   min-height: 100vh;
   background-color: #e8f0fe;
   color: #1a237e;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .page-header {
@@ -261,7 +267,7 @@ button:hover {
 .search-input {
   /* margin: 0px 0px 0px -10px ; */
   width: 100%;
-  padding: 7px 5px; 
+  padding: 7px 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -312,7 +318,7 @@ button:hover {
   left: 0; /* override left to 0 to ignore sidebar width */
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   display: flex;
@@ -352,7 +358,7 @@ button:hover {
   padding: 20px;
   border-radius: 8px;
   width: 320px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   position: relative;
   margin: auto; /* center horizontally */
 }
@@ -821,7 +827,7 @@ button:hover {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -833,7 +839,7 @@ button:hover {
   padding: 20px;
   border-radius: 8px;
   width: 320px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
@@ -867,7 +873,7 @@ button:hover {
   width: 30px;
   height: 22px;
   box-sizing: content-box;
-  background-color: rgba(0,0,0,0.1); /* temporary for visibility */
+  background-color: rgba(0, 0, 0, 0.1); /* temporary for visibility */
   position: absolute;
   top: 10px;
   left: 10px;
@@ -875,14 +881,14 @@ button:hover {
 }
 
 .hamburger-line {
-width: 30px;
-height: 3px;
-background-color: #4c1d95;
-border-radius: 2px;
-transition: background-color 0.3s ease;
-display: block;
+  width: 30px;
+  height: 3px;
+  background-color: #4c1d95;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+  display: block;
 }
 
 .sidebar-toggle-button:hover .hamburger-line {
-background-color: #2962ff;
+  background-color: #2962ff;
 }

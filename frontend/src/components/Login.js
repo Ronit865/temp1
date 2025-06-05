@@ -103,6 +103,9 @@ export default function Login() {
           </select>
         </div>
         <button type="submit">Login</button>
+        <button type="button" onClick={() => navigate('/register')} style={{marginLeft: '10px'}}>
+          Register
+        </button>
       </form>
     </div>
   );

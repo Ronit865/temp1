@@ -27,7 +27,14 @@ export default function EmployeeDashboard() {
       navigate('/');
       return;
     }
-    const emp = mockEmployees.find(e => e.joiningDate === loggedInUser);
+
+    // Get new employees from localStorage
+    const newEmployees = JSON.parse(localStorage.getItem("newEmployees")) || [];
+
+    // Merge mockEmployees and newEmployees
+    const allEmployees = [...mockEmployees, ...newEmployees];
+
+    const emp = allEmployees.find(e => e.joiningDate === loggedInUser);
     setEmployee(emp || null);
   }, [navigate]);
 
