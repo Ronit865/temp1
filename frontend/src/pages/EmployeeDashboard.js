@@ -117,78 +117,78 @@ export default function EmployeeDashboard() {
   }
 
   return (
-    <div className="dashboard-wrapper">
-      {/* <aside className="sidebar">
-        <div className="sidebar-header">
-          <div className="logo">🔧</div>
+    <div className="emp-dashboard-wrapper">
+      {/* <aside className="emp-sidebar">
+        <div className="emp-sidebar-header">
+          <div className="emp-logo">🔧</div>
           <h2>Employee Dashboard</h2>
         </div>
-        <nav className="sidebar-nav">
+        <nav className="emp-sidebar-nav">
           <ul>
-            <li className="active">Dashboard</li>
+            <li className="emp-active">Dashboard</li>
             <li>Operations</li>
             <li>Projects</li>
             <li>Reports</li>
             <li>Settings</li>
           </ul>
         </nav>
-        <div className="sidebar-footer">
-          <button className="btn btn-primary">Teamland</button>
-          <button className="btn btn-secondary" onClick={handleLogout}>Logout</button>
+        <div className="emp-sidebar-footer">
+          <button className="emp-btn emp-btn-primary">Teamland</button>
+          <button className="emp-btn emp-btn-secondary" onClick={handleLogout}>Logout</button>
         </div>
       </aside> */}
-      <div className="dashboard-main">
-        <header className="top-bar">
+      <div className="emp-dashboard-main">
+        <header className="emp-top-bar">
           <h1>Welcome {employee.name}</h1>
-          <div className="top-bar-icons">
-            <button className="btn btn-secondary" onClick={handleLogout}>Logout</button>
+          <div className="emp-top-bar-icons">
+            <button className="emp-btn emp-btn-secondary" onClick={handleLogout}>Logout</button>
           </div>
         </header>
-        <main className="dashboard-main-content">
+        <main className="emp-dashboard-main-content">
 
 
-          <section className="employee-details-cards">
+          <section className="emp-employee-details-cards">
             <h3>Employee Details</h3>
-            <div className="employee-cards-container">
-              <div className="card employee-card">
+            <div className="emp-employee-cards-container">
+              <div className="emp-card emp-employee-card">
                 <h4>Name</h4>
                 <p>{employee.name}</p>
               </div>
-              <div className="card employee-card">
+              <div className="emp-card emp-employee-card">
                 <h4>Position</h4>
                 <p>{employee.position}</p>
               </div>
-              <div className="card employee-card">
+              <div className="emp-card emp-employee-card">
                 <h4>Email</h4>
                 <p>{employee.email}</p>
               </div>
-              <div className="card employee-card">
+              <div className="emp-card emp-employee-card">
                 <h4>Phone</h4>
                 <p>{employee.phone}</p>
               </div>
-              <div className="card employee-card">
+              <div className="emp-card emp-employee-card">
                 <h4>Department</h4>
                 <p>{employee.department}</p>
               </div>
-              <div className="card employee-card">
+              <div className="emp-card emp-employee-card">
                 <h4>Location</h4>
                 <p>{employee.location}</p>
               </div>
-              <div className="card employee-card">
+              <div className="emp-card emp-employee-card">
                 <h4>Joining Date</h4>
                 <p>{employee.joiningDate}</p>
               </div>
             </div>
           </section>
-          <section className="charts-section">
-            {/* Certificate preview card moved outside employee details */}
-            <section className="certificate-preview-section">
-              <div className="card employee-card certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 12rem', margin:'-6px 0' }}>
+          <section className="emp-charts-section">
+            {/* Certificate preview card moved outside employee details */} 
+            <section className="emp-certificate-preview-section">
+              <div className="emp-card emp-employee-card emp-certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 12rem', margin:'-6px 0' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  <button className="btn btn-secondary" onClick={generatePreview}>
+                  <button className="emp-btn emp-btn-secondary" onClick={generatePreview}>
                     Preview Certificate
                   </button>
-                  <button className="btn btn-primary" onClick={handleDownloadClick}>
+                  <button className="emp-btn emp-btn-primary" onClick={handleDownloadClick}>
                     Download Internship Certificate
                   </button>
                 </div>
@@ -196,7 +196,7 @@ export default function EmployeeDashboard() {
               <div className='Priviewcard'>
 
                 {showPreview ? (
-                  <div className="certificate-preview" >
+                  <div className="emp-certificate-preview" >
                     <h1 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: '16px' }}>Internship Certificate</h1>
                     <p style={{ fontSize: '10px', marginBottom: '10px' }}>This is to certify that</p>
                     <p style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'center' }}>{employee.name}</p>
@@ -221,8 +221,8 @@ export default function EmployeeDashboard() {
 
 
           </section>
-          <section className="bottom-section">
-            <div className="bar-chart-container">
+          <section className="emp-bottom-section">
+            <div className="emp-bar-chart-container">
               <h3>Weekly Activity</h3>
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={barChartData}>
@@ -235,7 +235,7 @@ export default function EmployeeDashboard() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <div className="employee-status-table">
+            <div className="emp-employee-status-table">
               <h3>Performance Chart</h3>
               <ResponsiveContainer width="100%" height={200}>
                 <LineChart data={performanceData}>
