@@ -3,7 +3,7 @@ import '../styles.css';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell,
 } from 'recharts';
-import { FaTachometerAlt, FaUsers, FaCalendarCheck, FaFileAlt, FaMoneyCheckAlt, FaChartBar, FaCog } from 'react-icons/fa';
+
 
 const mockEmployees = [
   { id: 1, username: 'Masum', name: 'Masum Desai', position: 'Software Engineer', email: 'masum.deasi@gmail.com', phone: '+91 9123456789', department: 'Engineering', location: 'Mumbai', joiningDate: '2020-01-15' },
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
               </div>
             </>
           ) : (
-            <FaTachometerAlt size={24} color="#2962ff" />
+            null
           )}
         </div>
       </aside>
@@ -237,44 +237,7 @@ export default function AdminDashboard() {
           </div>
         </section>
 
-        {/* Employee Search Sidebar */}
-        {/* <aside className={`employee-search-sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
-          <button className="sidebar-toggle-button" onClick={toggleSidebar}>
-            {isSidebarOpen ? '' : ''}
-          </button>
-          <div className="search-bar-container">
-            <div className="search-input-wrapper">
-              <input
-                type="text"
-                placeholder="Search employees..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-              />
-              <svg className="search-icon-right" xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24" fill="none" stroke="#2962ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="7"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </div>
-          </div>
-          <div className="employee-names-box">
-            <ul>
-              {filteredEmployees.length > 0 ? (
-                filteredEmployees.map(employee => (
-                  <li
-                    key={employee.id}
-                    onClick={() => handleEmployeeClick(employee)}
-                    style={{ cursor: 'pointer', color: '#4c1d95', fontWeight: '600' }}
-                  >
-                    {employee.name}
-                  </li>
-                ))
-              ) : (
-                <li>No employees found.</li>
-              )}
-            </ul>
-          </div>
-        </aside> */}
+       
 
         {/* Employee Details Modal */}
         {selectedEmployee && (

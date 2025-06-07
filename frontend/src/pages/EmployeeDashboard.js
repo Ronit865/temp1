@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts';
 import jsPDF from 'jspdf';
-import '../styles.css';
+
 import '../EmployeeDashboardStyles.css';
 
 const mockEmployees = [
-  { id: 2, joiningDate: "2021-06-20", name: 'Harsh Jadhav', position: 'Product Manager', email: 'bob.smith@example.com', phone: '555-2345', department: 'Product', location: 'San Francisco' },
-  { id: 1, joiningDate: "2022-08-08", name: 'Masum Desai', position: 'Software Engineer', email: 'Masum.Desai@Gmail.com', phone: '8320331941', department: 'Engineering', location: 'Navsari' },
-  { id: 3, joiningDate: "2020-11-05", name: 'Ronit Dhimmar', position: 'UX Designer', email: 'charlie.brown@example.com', phone: '555-3456', department: 'Design', location: 'Boston' },
-  { id: 4, joiningDate: "2019-08-12", name: 'Sumit Malkani', position: 'QA Engineer', email: 'diana.prince@example.com', phone: '555-4567', department: 'Quality Assurance', location: 'Seattle' },
-  { id: 5, joiningDate: "2023-03-01", name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'ethan.hunt@example.com', phone: '555-5678', department: 'Operations', location: 'Austin' },
-  { id: 6, joiningDate: "2022-07-18", name: 'Jamin Mali', position: 'Security Analyst', email: 'fiona.glenanne@example.com', phone: '555-6789', department: 'Security', location: 'Chicago' },
-  { id: 7, joiningDate: "2021-12-30", name: 'Monil Patel', position: 'Business Analyst', email: 'george.bailey@example.com', phone: '555-7890', department: 'Business', location: 'Denver' },
-  { id: 8, joiningDate: "2020-04-25", name: 'Rahil Patel', position: 'HR Manager', email: 'hannah.wells@example.com', phone: '555-8901', department: 'Human Resources', location: 'Miami' },
-  { id: 9, joiningDate: "2019-09-10", name: 'Ayush More', position: 'Technical Writer', email: 'ian.fleming@example.com', phone: '555-9012', department: 'Documentation', location: 'Portland' },
-  { id: 10, joiningDate: "2023-02-14", name: 'Dip basopia', position: 'Marketing Specialist', email: 'jane.doe@example.com', phone: '555-0123', department: 'Marketing', location: 'Los Angeles' },
+  { id: 2, user: 'Appi002', joiningDate: "2021-06-20", name: 'Harsh Jadhav', position: 'Product Manager', email: 'harsh.jadhav@gmail.com', phone: '+91 9234567890', department: 'Product', location: 'Delhi' },
+  { id: 1, user: 'Appi001', joiningDate: "2022-08-08", name: 'Masum Desai', position: 'Software Engineer', email: 'masum.deasi@gmail.com', phone: '+91 9123456789', department: 'Engineering', location: 'Mumbai' },
+  { id: 3, user: 'Appi003', joiningDate: "2020-11-05", name: 'Ronit Dhimmar', position: 'UX Designer', email: 'ronit.dhimmar@gmail.com', phone: '+91 9345678901', department: 'Design', location: 'Bangalore' },
+  { id: 4, user: 'Appi004', joiningDate: "2019-08-12", name: 'Sumit Malkani', position: 'QA Engineer', email: 'sumit.malkani@gmail.com', phone: '+91 9456789012', department: 'Quality Assurance', location: 'Chennai' },
+  { id: 5, user: 'Appi005', joiningDate: "2023-03-01", name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'veer.kshatriya@gmail.com', phone: '+91 9567890123', department: 'Operations', location: 'Hyderabad' },
+  { id: 6, user: 'Appi006', joiningDate: "2022-07-18", name: 'Jamin Mali', position: 'Security Analyst', email: 'jamin.mali@gmail.com', phone: '+91 9678901234', department: 'Security', location: 'Pune' },
+  { id: 7, user: 'Appi007', joiningDate: "2021-12-30", name: 'Monil Patel', position: 'Business Analyst', email: 'monil.patel@gmail.com', phone: '+91 9789012345', department: 'Business', location: 'Ahmedabad' },
+  { id: 8, user: 'Appi008', joiningDate: "2020-04-25", name: 'Rahil Patel', position: 'HR Manager', email: 'rahil.patel@gmail.com', phone: '+91 9890123456', department: 'Human Resources', location: 'Kolkata' },
+  { id: 9, user: 'Appi009', joiningDate: "2019-09-10", name: 'Ayush More', position: 'Technical Writer', email: 'ayush.more@gmail.com', phone: '+91 9901234567', department: 'Documentation', location: 'Surat' },
+  { id: 10, user: 'Appi010', joiningDate: "2023-02-14", name: 'Dip basopia', position: 'Marketing Specialist', email: 'dip.basopia@gmail.com', phone: '+91 9012345678', department: 'Marketing', location: 'Jaipur' },
 ];
 
 const projectProgressData = [
@@ -60,8 +60,7 @@ export default function EmployeeDashboard() {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedInUser');
-    const role = localStorage.getItem('role');
-    if (!loggedInUser || role !== 'employee') {
+    if (!loggedInUser) {
       navigate('/');
       return;
     }
@@ -72,13 +71,12 @@ export default function EmployeeDashboard() {
     // Merge mockEmployees and newEmployees
     const allEmployees = [...mockEmployees, ...newEmployees];
 
-    const emp = allEmployees.find(e => e.joiningDate === loggedInUser);
+    const emp = allEmployees.find(e => e.user === loggedInUser);
     setEmployee(emp || null);
   }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('loggedInUser');
-    localStorage.removeItem('role');
     navigate('/');
   };
 
@@ -182,8 +180,8 @@ export default function EmployeeDashboard() {
           </section>
           <section className="emp-charts-section">
             {/* Certificate preview card moved outside employee details */} 
-            <section className="emp-certificate-preview-section">
-              <div className="emp-card emp-employee-card emp-certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 12rem', margin:'-6px 0' }}>
+          <section className="certificate-preview-section">
+              <div className="emp-card emp-employee-card emp-certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 2rem', margin:'-6px 0', maxWidth: '350px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <button className="emp-btn emp-btn-secondary" onClick={generatePreview}>
                     Preview Certificate
@@ -193,7 +191,7 @@ export default function EmployeeDashboard() {
                   </button>
                 </div>
               </div>
-              <div className='Priviewcard'>
+              <div className='Priviewcard' style={{ maxWidth: '300px', marginLeft: '20px' }}>
 
                 {showPreview ? (
                   <div className="emp-certificate-preview" >

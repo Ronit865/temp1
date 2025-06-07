@@ -1,5 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 1.5rem;
+}
+
+.form-grid .form-group {
+  width: 100%;
+}
+
+.form-grid input,
+.form-grid select {
+  width: 100%;
+  box-sizing: border-box;
+  height: 40px;
+}
+
 body {
   margin: 0;
   padding: 0 0 0 0;
@@ -16,12 +33,25 @@ body {
   padding: 1rem; /* added padding for smaller screens */
 }
 
+.register-container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+  padding-top: 0;
+}
+
 .form-card {
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(26, 35, 126, 0.2);
-  width: 35vw;
+  width: 60vw;
+  max-width: 700px;
+  margin: auto;
   /* max-width: 100%; */
   display: flex;
   flex-direction: column;
@@ -30,7 +60,6 @@ body {
   /* height: 117vh; */
   /* margin-top: 12rem; */
 }
-
 h2,
 h1 {
   font-weight: 600;
@@ -43,7 +72,7 @@ input,
 select {
   padding: 0.75rem 1rem;
   font-size: 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1.5px solid #90caf9; /* light blue border */
   transition: border-color 0.3s ease;
   font-weight: 300;
@@ -69,22 +98,25 @@ select:focus {
 }
 
 button {
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  background: linear-gradient(45deg, #2962ff, #1a237e);
-  color: white;
-  border: none;
-  border-radius: 8px;
+  background: #b0e0ff; /* powder blue */
+  color: #1a237e;
+  border: 1.5px solid #b0e0ff;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.3s ease;
-  align-self: center; /* center the button */
-  width: 100%;
-  max-width: 150px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  align-self: center;
+  width: auto;
+  max-width: none;
+  box-shadow: none;
 }
 
 button:hover {
-  background: linear-gradient(45deg, #1a237e, #2962ff);
+  background-color: #7ec0ff;
+  color: white;
+  border-color: #7ec0ff;
 }
 
 .page-container {
@@ -120,18 +152,29 @@ button:hover {
   background: transparent;
 }
 .btn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   font-size: 1rem;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  border: none;
-  transition: background 0.3s ease;
+  border: 1.5px solid #2962ff;
+  background: transparent;
+  color: #2962ff;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  box-shadow: none;
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, #2962ff, #1a237e);
+  background: transparent;
+  color: #2962ff;
+  border: 1.5px solid #2962ff;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2962ff;
   color: white;
+  border-color: #2962ff;
 }
 
 .btn-primary:hover {
@@ -139,12 +182,16 @@ button:hover {
 }
 
 .btn-logout {
-  background: #ef5350; /* red */
-  color: white;
+  background: transparent;
+  color: #ef5350;
+  border: 1.5px solid #ef5350;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn-logout:hover {
-  background: #b71c1c; /* dark red */
+  background-color: #ef5350;
+  color: white;
+  border-color: #ef5350;
 }
 
 .employee-details {
@@ -468,7 +515,7 @@ button:hover {
   padding: 6px 10px;
   font-size: 0.9rem;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
 }
@@ -595,7 +642,7 @@ button:hover {
 
 .user-avatar {
   border-radius: 50%;
-  width: 60px;
+  width: 65px;
   height: 40px;
 }
 
@@ -864,35 +911,44 @@ button:hover {
   color: white;
 }
 .sidebar-toggle-button {
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 6px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 22px;
+  justify-content: space-around;
+  width: 28px;
+  height: 24px;
   box-sizing: content-box;
-  background-color: rgba(0, 0, 0, 0.1); /* temporary for visibility */
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   z-index: 1001;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.sidebar-toggle-button:hover {
+  background-color: rgba(41, 98, 255, 0.1);
 }
 
 .hamburger-line {
-  width: 30px;
-  height: 3px;
+  width: 28px;
+  height: 2.5px;
   background-color: #4c1d95;
   border-radius: 2px;
-  transition: background-color 0.3s ease;
+  transition: all 0.4s ease;
   display: block;
+  transform-origin: 1px;
 }
 
 .sidebar-toggle-button:hover .hamburger-line {
   background-color: #2962ff;
 }
+
+/* Remove hamburger animation for static logo */
+/* No toggle animation styles */
 
 .certificate-preview {
   border: 2px solid #000;

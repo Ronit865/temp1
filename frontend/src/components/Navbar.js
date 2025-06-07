@@ -4,11 +4,9 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const loggedInUser = localStorage.getItem("loggedInUser");
-  const role = localStorage.getItem("role");
 
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
-    localStorage.removeItem("role");
     navigate("/");
   };
 
@@ -21,11 +19,8 @@ export default function Navbar() {
         {!loggedInUser && (
           <Link to="/" className="navbar-link">Login</Link>
         )}
-        {loggedInUser && role === "admin" && (
-          <Link to="/admin" className="navbar-link">Admin Dashboard</Link>
-        )}
-        {loggedInUser && role === "employee" && (
-          <Link to="/employee" className="navbar-link">Employee Dashboard</Link>
+        {loggedInUser && (
+          <Link to="/employee" className="navbar-link">Dashboard</Link>
         )}
       </div>
       <div className="navbar-right">
