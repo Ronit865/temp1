@@ -178,6 +178,33 @@ export default function EmployeeDashboard() {
               </div>
             </div>
           </section>
+          <section className="emp-bottom-section">
+            <div className="emp-bar-chart-container">
+              <h3>Weekly Activity</h3>
+              <ResponsiveContainer width="100%" height={200}>
+                <BarChart data={barChartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="uv" fill="#2962ff" />
+                  <Bar dataKey="pv" fill="#82ca9d" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="emp-employee-status-table">
+              <h3>Performance Chart</h3>
+              <ResponsiveContainer width="100%" height={200}>
+                <LineChart data={performanceData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="uv" stroke="#2962ff" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
           <section className="emp-charts-section">
             {/* Certificate preview card moved outside employee details */} 
           <section className="certificate-preview-section">
@@ -219,33 +246,7 @@ export default function EmployeeDashboard() {
 
 
           </section>
-          <section className="emp-bottom-section">
-            <div className="emp-bar-chart-container">
-              <h3>Weekly Activity</h3>
-              <ResponsiveContainer width="100%" height={200}>
-                <BarChart data={barChartData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="uv" fill="#2962ff" />
-                  <Bar dataKey="pv" fill="#82ca9d" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="emp-employee-status-table">
-              <h3>Performance Chart</h3>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={performanceData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="uv" stroke="#2962ff" />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </section>
+          
         </main>
       </div>
     </div>

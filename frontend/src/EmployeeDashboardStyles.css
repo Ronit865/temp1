@@ -76,28 +76,28 @@ body, html, #root {
 .emp-btn {
   padding: 10px 15px;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .emp-btn-primary {
-  background: linear-gradient(90deg, #1a237e, #4a148c);
+  background: #4682B4; /* steel blue - darker */
   color: #fff;
 }
 
 .emp-btn-primary:hover {
-  background: linear-gradient(90deg, #4a148c, #1a237e);
+  background: #5a9bd6; /* lighter steel blue */
 }
 
 .emp-btn-secondary {
-  background: linear-gradient(90deg, #4a148c, #1a237e);
+  background: #4682B4; /* steel blue - darker */
   color: #fff;
 }
 
 .emp-btn-secondary:hover {
-  background: linear-gradient(90deg, #1a237e, #4a148c);
+  background: #5a9bd6; /* lighter steel blue */
 }
 
 /* Main dashboard area */
