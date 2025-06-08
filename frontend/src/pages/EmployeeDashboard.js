@@ -116,25 +116,7 @@ export default function EmployeeDashboard() {
 
   return (
     <div className="emp-dashboard-wrapper">
-      {/* <aside className="emp-sidebar">
-        <div className="emp-sidebar-header">
-          <div className="emp-logo">🔧</div>
-          <h2>Employee Dashboard</h2>
-        </div>
-        <nav className="emp-sidebar-nav">
-          <ul>
-            <li className="emp-active">Dashboard</li>
-            <li>Operations</li>
-            <li>Projects</li>
-            <li>Reports</li>
-            <li>Settings</li>
-          </ul>
-        </nav>
-        <div className="emp-sidebar-footer">
-          <button className="emp-btn emp-btn-primary">Teamland</button>
-          <button className="emp-btn emp-btn-secondary" onClick={handleLogout}>Logout</button>
-        </div>
-      </aside> */}
+      
       <div className="emp-dashboard-main">
         <header className="emp-top-bar">
           <h1>Welcome {employee.name}</h1>
@@ -241,12 +223,7 @@ export default function EmployeeDashboard() {
                 )}
               </div>
             </section>
-
-
-
-
-          </section>
-          
+          </section> 
         </main>
       </div>
     </div>
