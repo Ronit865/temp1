@@ -1290,7 +1290,7 @@ button:hover {
   .top-bar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
   }
 
   .top-bar-left {
@@ -1328,6 +1328,44 @@ button:hover {
 
   .top-bar-left {
     font-size: 1rem;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .metrics-cards {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .metric-card {
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .charts-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .line-chart-container,
+  .pie-chart-container {
+    height: 220px !important;
+    margin-bottom: 15px;
+  }
+
+  .bottom-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .recent-activities,
+  .employee-status-table {
+    width: 100%;
+    margin-bottom: 15px;
   }
 
   .employee-status-table table,
