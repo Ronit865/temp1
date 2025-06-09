@@ -10,13 +10,13 @@ function AppWrapper() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/employee" element={<EmployeeDashboard />} />
-        <Route path="/testchart" element={<AdminDashboard />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+        <Routes>
+         <Route path="/" element={<Login />} />
+         <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/employee" element={<EmployeeDashboard />} /> 
+         <Route path="/testchart" element={<AdminDashboard />} />
+         <Route path="/register" element={<Register />} />
+       </Routes> 
     </>
   );
 }

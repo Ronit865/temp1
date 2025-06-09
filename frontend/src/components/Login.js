@@ -6,7 +6,7 @@ export default function Login() {
   const [user, setUser] = useState("");
   const [joiningDate, setJoiningDate] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -19,19 +19,24 @@ export default function Login() {
 
     setLoading(true);
 
+    console.log('Sending login request with user:', user, 'joiningDate:', joiningDate);
+
+    // Normalize joiningDate to yyyy-mm-dd format
+    const normalizedJoiningDate = new Date(joiningDate).toISOString().split('T')[0];
+    console.log('Normalized joiningDate:', normalizedJoiningDate);
+
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ user, joiningDate })
+        body: JSON.stringify({ user, joiningDate: normalizedJoiningDate })
       });
-
       const data = await response.json();
 
       if (response.ok && data.success) {
-        localStorage.setItem("loggedInUser", user);
+
         if (data.role === 'admin') {
           navigate("/admin");
         } else if (data.role === 'employee') {
@@ -78,7 +83,7 @@ export default function Login() {
             disabled={loading}
           />
         </div>
-        
+
         <div className="button-group">
           <button type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Login'}</button>
           <button type="button" onClick={() => navigate('/register')} disabled={loading}>

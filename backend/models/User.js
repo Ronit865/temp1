@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   user: { type: String, required: true, unique: true },
-  joiningDate: { type: String, required: true },
+  joiningDate: { type: Date, required: true },
   role: { type: String, enum: ['admin', 'employee'], required: true }
 });
 
