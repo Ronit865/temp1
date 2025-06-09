@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./models/User.js');
+const Employee = require('./models/Employee.js');
 
 require('dotenv').config();
 
@@ -68,6 +69,16 @@ app.get('/api/users', async (req, res) => {
     res.json({ success: true, users });
   } catch (error) {
     console.error('Error fetching users:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+app.get('/api/employees', async (req, res) => {
+  try {
+    const employees = await Employee.find({});
+    res.json({ success: true, employees });
+  } catch (error) {
+    console.error('Error fetching employees:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });

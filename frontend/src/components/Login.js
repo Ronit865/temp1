@@ -36,6 +36,7 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok && data.success) {
+        localStorage.setItem('loggedInUser', user);
 
         if (data.role === 'admin') {
           navigate("/admin");

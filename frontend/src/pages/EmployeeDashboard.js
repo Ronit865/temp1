@@ -1,22 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import jsPDF from 'jspdf';
 
 import '../EmployeeDashboardStyles.css';
-
-const mockEmployees = [
-  { id: 2, user: 'Appi002', joiningDate: "2021-06-20", name: 'Harsh Jadhav', position: 'Product Manager', email: 'harsh.jadhav@gmail.com', phone: '+91 9234567890', department: 'Product', location: 'Delhi' },
-  { id: 1, user: 'Appi001', joiningDate: "2022-08-08", name: 'Masum Desai', position: 'Software Engineer', email: 'masum.deasi@gmail.com', phone: '+91 9123456789', department: 'Engineering', location: 'Mumbai' },
-  { id: 3, user: 'Appi003', joiningDate: "2020-11-05", name: 'Ronit Dhimmar', position: 'UX Designer', email: 'ronit.dhimmar@gmail.com', phone: '+91 9345678901', department: 'Design', location: 'Bangalore' },
-  { id: 4, user: 'Appi004', joiningDate: "2019-08-12", name: 'Sumit Malkani', position: 'QA Engineer', email: 'sumit.malkani@gmail.com', phone: '+91 9456789012', department: 'Quality Assurance', location: 'Chennai' },
-  { id: 5, user: 'Appi005', joiningDate: "2023-03-01", name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'veer.kshatriya@gmail.com', phone: '+91 9567890123', department: 'Operations', location: 'Hyderabad' },
-  { id: 6, user: 'Appi006', joiningDate: "2022-07-18", name: 'Jamin Mali', position: 'Security Analyst', email: 'jamin.mali@gmail.com', phone: '+91 9678901234', department: 'Security', location: 'Pune' },
-  { id: 7, user: 'Appi007', joiningDate: "2021-12-30", name: 'Monil Patel', position: 'Business Analyst', email: 'monil.patel@gmail.com', phone: '+91 9789012345', department: 'Business', location: 'Ahmedabad' },
-  { id: 8, user: 'Appi008', joiningDate: "2020-04-25", name: 'Rahil Patel', position: 'HR Manager', email: 'rahil.patel@gmail.com', phone: '+91 9890123456', department: 'Human Resources', location: 'Kolkata' },
-  { id: 9, user: 'Appi009', joiningDate: "2019-09-10", name: 'Ayush More', position: 'Technical Writer', email: 'ayush.more@gmail.com', phone: '+91 9901234567', department: 'Documentation', location: 'Surat' },
-  { id: 10, user: 'Appi010', joiningDate: "2023-02-14", name: 'Dip basopia', position: 'Marketing Specialist', email: 'dip.basopia@gmail.com', phone: '+91 9012345678', department: 'Marketing', location: 'Jaipur' },
-];
 
 const projectProgressData = [
   { name: 'Week 1', uv: 400 },
@@ -55,7 +42,9 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 export default function EmployeeDashboard() {
   const [employee, setEmployee] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,14 +54,27 @@ export default function EmployeeDashboard() {
       return;
     }
 
-    // Get new employees from localStorage
-    const newEmployees = JSON.parse(localStorage.getItem("newEmployees")) || [];
+    const fetchEmployees = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/employees');
+        if (!response.ok) {
+          throw new Error('Failed to fetch employees');
+        }
+        const data = await response.json();
+        if (data.success) {
+          const emp = data.employees.find(e => e.user === loggedInUser);
+          setEmployee(emp || null);
+        } else {
+          setError('Failed to load employee data');
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // Merge mockEmployees and newEmployees
-    const allEmployees = [...mockEmployees, ...newEmployees];
-
-    const emp = allEmployees.find(e => e.user === loggedInUser);
-    setEmployee(emp || null);
+    fetchEmployees();
   }, [navigate]);
 
   const handleLogout = () => {
@@ -88,7 +90,7 @@ export default function EmployeeDashboard() {
     doc.setFontSize(16);
     doc.text(`This is to certify that ${employee.name}`, 20, 60);
     doc.text(`has successfully completed the internship as a ${employee.position}.`, 20, 75);
-    doc.text(`Joining Date: ${employee.joiningDate}`, 20, 90);
+    doc.text(`Joining Date: ${new Date(employee.joiningDate).toLocaleDateString()}`, 20, 90);
     doc.text(`Department: ${employee.department}`, 20, 105);
     doc.text('We wish them all the best in their future endeavors.', 20, 135);
     doc.text('Date: ' + new Date().toLocaleDateString(), 20, 160);
@@ -96,8 +98,6 @@ export default function EmployeeDashboard() {
     doc.line(140, 165, 190, 165); // signature line
     return doc;
   };
-
-  const [showPreview, setShowPreview] = useState(false);
 
   const generatePreview = () => {
     if (!employee) return;
@@ -110,13 +110,20 @@ export default function EmployeeDashboard() {
     doc.save(`${employee.name}_Internship_Certificate.pdf`);
   };
 
+  if (loading) {
+    return <p>Loading employee data...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   if (!employee) {
     return <p>No employee details found. Please log in.</p>;
   }
 
   return (
     <div className="emp-dashboard-wrapper">
-      
       <div className="emp-dashboard-main">
         <header className="emp-top-bar">
           <h1>Welcome {employee.name}</h1>
@@ -125,8 +132,6 @@ export default function EmployeeDashboard() {
           </div>
         </header>
         <main className="emp-dashboard-main-content">
-
-
           <section className="emp-employee-details-cards">
             <h3>Employee Details</h3>
             <div className="emp-employee-cards-container">
@@ -156,7 +161,7 @@ export default function EmployeeDashboard() {
               </div>
               <div className="emp-card emp-employee-card">
                 <h4>Joining Date</h4>
-                <p>{employee.joiningDate}</p>
+                <p>{new Date(employee.joiningDate).toLocaleDateString()}</p>
               </div>
             </div>
           </section>
@@ -188,8 +193,7 @@ export default function EmployeeDashboard() {
             </div>
           </section>
           <section className="emp-charts-section">
-            {/* Certificate preview card moved outside employee details */} 
-          <section className="certificate-preview-section">
+            <section className="certificate-preview-section">
               <div className="emp-card emp-employee-card emp-certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 2rem', margin:'-6px 0', maxWidth: '350px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <button className="emp-btn emp-btn-secondary" onClick={generatePreview}>
@@ -201,7 +205,6 @@ export default function EmployeeDashboard() {
                 </div>
               </div>
               <div className='Priviewcard' style={{ maxWidth: '300px', marginLeft: '20px' }}>
-
                 {showPreview ? (
                   <div className="emp-certificate-preview" >
                     <h1 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: '16px' }}>Internship Certificate</h1>
@@ -209,7 +212,7 @@ export default function EmployeeDashboard() {
                     <p style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'center' }}>{employee.name}</p>
                     <p style={{ fontSize: '10px', marginBottom: '10px', textAlign: 'center' }}>has successfully completed the internship as a</p>
                     <p style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'center' }}>{employee.position}</p>
-                    <p style={{ fontSize: '9px', marginBottom: '5px' }}>Joining Date: <strong>{employee.joiningDate}</strong></p>
+                    <p style={{ fontSize: '9px', marginBottom: '5px' }}>Joining Date: <strong>{new Date(employee.joiningDate).toLocaleDateString()}</strong></p>
                     <p style={{ fontSize: '9px', marginBottom: '5px' }}>Department: <strong>{employee.department}</strong></p>
                     <p style={{ fontSize: '9px', marginTop: '15px', marginBottom: '15px' }}>We wish them all the best in their future endeavors.</p>
                     <p style={{ fontSize: '9px' }}>Date: <strong>{new Date().toLocaleDateString()}</strong></p>
