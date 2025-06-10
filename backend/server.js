@@ -110,6 +110,20 @@ app.post('/api/employees', async (req, res) => {
 
     await newEmployee.save();
 
+    // Also add user to users collection with role "employee"
+    const existingUser = await User.findOne({ user });
+    if (existingUser) {
+      return res.status(409).json({ success: false, message: 'User already exists in users collection' });
+    }
+
+    const newUser = new User({
+      user,
+      joiningDate,
+      role: 'employee'
+    });
+
+    await newUser.save();
+
     res.status(201).json({ success: true, message: 'Employee registered successfully' });
   } catch (error) {
     console.error('Error registering employee:', error);
