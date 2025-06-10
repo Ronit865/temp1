@@ -83,6 +83,40 @@ app.get('/api/employees', async (req, res) => {
   }
 });
 
+app.post('/api/employees', async (req, res) => {
+  const { id, user, joiningDate, name, position, email, phone, department, location } = req.body;
+
+  if (!id || !user || !joiningDate || !name || !position || !email || !phone || !department || !location) {
+    return res.status(400).json({ success: false, message: 'All fields are required' });
+  }
+
+  try {
+    const existingEmployee = await Employee.findOne({ user });
+    if (existingEmployee) {
+      return res.status(409).json({ success: false, message: 'User already exists' });
+    }
+
+    const newEmployee = new Employee({
+      id,
+      user,
+      joiningDate,
+      name,
+      position,
+      email,
+      phone,
+      department,
+      location
+    });
+
+    await newEmployee.save();
+
+    res.status(201).json({ success: true, message: 'Employee registered successfully' });
+  } catch (error) {
+    console.error('Error registering employee:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

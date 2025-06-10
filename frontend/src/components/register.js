@@ -11,11 +11,11 @@ export default function Register() {
   const [location, setLocation] = useState("");
   const [joiningDate, setJoiningDate] = useState("");
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const formData = {
       id: Date.now(),
-      username,
+      user: username,
       name,
       position,
       email,
@@ -25,26 +25,35 @@ export default function Register() {
       joiningDate,
     };
 
-    // Get existing newEmployees from localStorage or initialize empty array
-    const existingNewEmployees = JSON.parse(localStorage.getItem("newEmployees")) || [];
+    try {
+      const response = await fetch('http://localhost:5000/api/employees', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
 
-    // Add new employee data
-    existingNewEmployees.push(formData);
+      const data = await response.json();
 
-    // Save back to localStorage
-    localStorage.setItem("newEmployees", JSON.stringify(existingNewEmployees));
-
-    console.log("Register form data saved:", formData);
-
-    // Optionally clear form fields after registration
-    setUsername("");
-    setName("");
-    setPosition("");
-    setEmail("");
-    setPhone("");
-    setDepartment("");
-    setLocation("");
-    setJoiningDate("");
+      if (response.ok) {
+        alert('Registration successful!');
+        // Clear form fields
+        setUsername("");
+        setName("");
+        setPosition("");
+        setEmail("");
+        setPhone("");
+        setDepartment("");
+        setLocation("");
+        setJoiningDate("");
+      } else {
+        alert('Registration failed: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert('An error occurred during registration. Please try again.');
+    }
   };
 
   return (
@@ -53,9 +62,9 @@ export default function Register() {
         <h2>Register</h2>
         <div className="form-grid">
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">User</label>
             <input
-              id="username"
+              id="user"
               type="text"
               placeholder="Enter your username"
               value={username}
