@@ -1,22 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles.css';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell,
 } from 'recharts';
-
-
-const mockEmployees = [
-  { id: 1, user: 'Appi001', name: 'Masum Desai', position: 'Software Engineer', email: 'masum.deasi@gmail.com', phone: '+91 9123456789', department: 'Engineering', location: 'Mumbai', joiningDate: '2020-01-15' },
-  { id: 2, user: 'Appi002', name: 'Harsh Jadhav', position: 'Product Manager', email: 'harsh.jadhav@gmail.com', phone: '+91 9234567890', department: 'Product', location: 'Delhi', joiningDate: '2019-03-22' },
-  { id: 3, user: 'Appi003', name: 'Ronit Dhimmar', position: 'UX Designer', email: 'ronit.dhimmar@gmail.com', phone: '+91 9345678901', department: 'Design', location: 'Bangalore', joiningDate: '2021-07-10' },
-  { id: 4, user: 'Appi004', name: 'Sumit Malkani', position: 'QA Engineer', email: 'sumit.malkani@gmail.com', phone: '+91 9456789012', department: 'Quality Assurance', location: 'Chennai', joiningDate: '2018-11-05' },
-  { id: 5, user: 'Appi005', name: 'Veer Kshatriya', position: 'DevOps Engineer', email: 'veer.kshatriya@gmail.com', phone: '+91 9567890123', department: 'Operations', location: 'Hyderabad', joiningDate: '2020-06-18' },
-  { id: 6, user: 'Appi006', name: 'Jamin Mali', position: 'Security Analyst', email: 'jamin.mali@gmail.com', phone: '+91 9678901234', department: 'Security', location: 'Pune', joiningDate: '2019-09-30' },
-  { id: 7, user: 'Appi007', name: 'Monil Patel', position: 'Business Analyst', email: 'monil.patel@gmail.com', phone: '+91 9789012345', department: 'Business', location: 'Ahmedabad', joiningDate: '2021-01-12' },
-  { id: 8, user: 'Appi008', name: 'Rahil Patel', position: 'HR Manager', email: 'rahil.patel@gmail.com', phone: '+91 9890123456', department: 'Human Resources', location: 'Kolkata', joiningDate: '2017-04-25' },
-  { id: 9, user: 'Appi009', name: 'Ayush More', position: 'Technical Writer', email: 'ayush.more@gmail.com', phone: '+91 9901234567', department: 'Documentation', location: 'Surat', joiningDate: '2020-10-01' },
-  { id: 10, user: 'Appi010', name: 'Dip basopia', position: 'Marketing Specialist', email: 'dip.basopia@gmail.com', phone: '+91 9012345678', department: 'Marketing', location: 'Jaipur', joiningDate: '2018-08-14' },
-];
 
 const attendanceData = [
   { month: 'Jan', Attendance: 90 },
@@ -61,8 +47,27 @@ export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [employees, setEmployees] = useState([]);
 
-  const filteredEmployees = mockEmployees.filter(employee =>
+  useEffect(() => {
+    async function fetchEmployees() {
+      try {
+        const response = await fetch('http://localhost:5000/api/employees');
+        const data = await response.json();
+        console.log('Fetched employees data:', data);
+        if (data.success) {
+          setEmployees(data.employees);
+        } else {
+          console.error('Failed to fetch employees:', data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    }
+    fetchEmployees();
+  }, []);
+
+  const filteredEmployees = employees.filter(employee =>
     employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -104,7 +109,7 @@ export default function AdminDashboard() {
                   <ul>
                     {filteredEmployees.map(employee => (
                       <li
-                        key={employee.id}
+                        key={employee._id}
                         onClick={() => handleEmployeeClick(employee)}
                         className="sidebar-employee-item"
                       >
@@ -143,7 +148,7 @@ export default function AdminDashboard() {
         <section className="metrics-cards">
           <div className="metric-card pink">
             <h3>Total Employees</h3>
-            <p>{mockEmployees.length}</p>
+            <p>{employees.length}</p>
           </div>
           <div className="metric-card purple">
             <h3>Attendance Rate</h3>
