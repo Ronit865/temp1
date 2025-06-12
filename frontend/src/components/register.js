@@ -1,7 +1,7 @@
 import { useState } from "react";
 import '../styles.css';
 
-export default function Register() {
+export default function Register({ onClose }) {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
@@ -47,6 +47,9 @@ export default function Register() {
         setDepartment("");
         setLocation("");
         setJoiningDate("");
+        if (onClose) {
+          onClose();
+        }
       } else {
         alert('Registration failed: ' + data.message);
       }
@@ -59,7 +62,7 @@ export default function Register() {
   return (
     <div className="register-container-center">
       <form onSubmit={handleRegister} className="form-card" noValidate>
-        <h2>Register</h2>
+        <h2>Employee Details</h2>
         <div className="form-grid">
           <div className="form-group">
             <label htmlFor="username">User</label>
@@ -150,7 +153,7 @@ export default function Register() {
             />
           </div>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">ADD</button>
       </form>
     </div>
   );

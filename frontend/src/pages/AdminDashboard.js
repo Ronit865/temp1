@@ -43,11 +43,14 @@ const employeeStatus = [
   { id: 5, name: 'Veer Kshatriya', position: 'DevOps Engineer', status: 'Active' },
 ];
 
+import Register from '../components/register';
+
 export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [employees, setEmployees] = useState([]);
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
 
   useEffect(() => {
     async function fetchEmployees() {
@@ -81,6 +84,14 @@ export default function AdminDashboard() {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const openRegisterPopup = () => {
+    setIsRegisterPopupOpen(true);
+  };
+
+  const closeRegisterPopup = () => {
+    setIsRegisterPopupOpen(false);
   };
 
   return (
@@ -121,6 +132,20 @@ export default function AdminDashboard() {
                   <p>No employees found.</p>
                 )}
               </div>
+               <button
+                className="add-employee-button"
+                onClick={openRegisterPopup}
+                aria-label="Add Employee"
+              >
+                Add Employee
+              </button>
+              <button
+                className="remove-employee-button"
+                onClick={() => alert('Remove Employee button clicked')}
+                aria-label="Remove Employee"
+              >
+                Remove Employee
+              </button>
             </>
           ) : (
             null
@@ -244,7 +269,7 @@ export default function AdminDashboard() {
 
        
 
-        {/* Employee Details Modal */}
+        {/* Employee Details Modal */} 
         {selectedEmployee && (
           <div className="modal-overlay" onClick={handleCloseDetails}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -257,6 +282,16 @@ export default function AdminDashboard() {
               <p><strong>Location:</strong> {selectedEmployee.location}</p>
               <p><strong>Joining Date:</strong> {selectedEmployee.joiningDate}</p>
             </div>
+          </div>
+        )}
+
+        {/* Register Popup Modal */}
+        {isRegisterPopupOpen && (
+          <div className="modal-overlay" onClick={closeRegisterPopup}>
+        <div className="modal-content popup-card" onClick={e => e.stopPropagation()}>
+          <button onClick={closeRegisterPopup} className="modal-close-button"><div>&#10006;</div></button>
+          <Register onClose={closeRegisterPopup} />
+        </div>
           </div>
         )}
 

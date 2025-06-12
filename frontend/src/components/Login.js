@@ -87,9 +87,6 @@ export default function Login() {
 
         <div className="button-group">
           <button type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Login'}</button>
-          <button type="button" onClick={() => navigate('/register')} disabled={loading}>
-            Register
-          </button>
         </div>
       </form>
     </div>
