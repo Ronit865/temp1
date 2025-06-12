@@ -131,6 +131,25 @@ app.post('/api/employees', async (req, res) => {
   }
 });
 
+app.delete('/api/employees/:id', async (req, res) => {
+  const employeeId = req.params.id;
+
+  try {
+    const deletedEmployee = await Employee.findByIdAndDelete(employeeId);
+    if (!deletedEmployee) {
+      return res.status(404).json({ success: false, message: 'Employee not found' });
+    }
+
+    // Also remove user from users collection
+    await User.deleteOne({ user: deletedEmployee.user });
+
+    res.json({ success: true, message: 'Employee removed successfully' });
+  } catch (error) {
+    console.error('Error removing employee:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

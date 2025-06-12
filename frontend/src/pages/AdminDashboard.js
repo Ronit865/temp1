@@ -52,6 +52,36 @@ export default function AdminDashboard() {
   const [employees, setEmployees] = useState([]);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
 
+  const handleRemoveEmployee = async () => {
+    if (!selectedEmployee) {
+      alert('Please select an employee to remove.');
+      return;
+    }
+
+    if (!window.confirm(`Are you sure you want to remove ${selectedEmployee.name}?`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/employees/${selectedEmployee._id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        alert('Employee removed successfully.');
+        // Update employees state to remove deleted employee
+        setEmployees(prevEmployees => prevEmployees.filter(emp => emp._id !== selectedEmployee._id));
+        setSelectedEmployee(null);
+      } else {
+        alert(`Failed to remove employee: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Error removing employee:', error);
+      alert('Error removing employee. Please try again.');
+    }
+  };
+
   useEffect(() => {
     async function fetchEmployees() {
       try {
@@ -141,8 +171,9 @@ export default function AdminDashboard() {
               </button>
               <button
                 className="remove-employee-button"
-                onClick={() => alert('Remove Employee button clicked')}
+                onClick={handleRemoveEmployee}
                 aria-label="Remove Employee"
+                disabled={!selectedEmployee}
               >
                 Remove Employee
               </button>
