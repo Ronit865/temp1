@@ -697,13 +697,32 @@ button:hover {
   padding-top: 55px;
   display: flex;
   flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  z-index: 2000;
   box-shadow: 2px 0 8px rgba(0,0,0,0.1);
   transition: width 0.3s ease;
+}
+
+/* On small screens, sidebar overlays content with fixed positioning */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 2000;
+    width: 280px;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 50px 15px 15px 15px; /* increased top padding for toggle button */
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    transition: width 0.3s ease;
+  }
+
+  .sidebar.closed {
+    width: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
 }
 
 .sidebar-toggle-button {
@@ -761,7 +780,7 @@ button:hover {
   width: 0;
   padding: 0; /* remove all padding when closed */
   overflow: hidden;
-  position: relative;
+  /* position: relative; */
 }
 
 .sidebar-toggle-button {
@@ -829,6 +848,8 @@ button:hover {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  /* Ensure main content takes remaining space */
+  width: auto;
 }
 
 .top-bar {
