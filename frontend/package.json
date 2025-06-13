@@ -2,11 +2,7 @@
   "name": "role-based-login-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:5000"
-    }
-    },
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@playwright/test": "^1.52.0",
     "jspdf": "^3.0.1",
