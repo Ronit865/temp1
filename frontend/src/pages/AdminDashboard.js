@@ -51,6 +51,7 @@ export default function AdminDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [employees, setEmployees] = useState([]);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
+  const [employeeToEdit, setEmployeeToEdit] = useState(null);
 
   const handleRemoveEmployee = async () => {
     if (!selectedEmployee) {
@@ -116,11 +117,13 @@ export default function AdminDashboard() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const openRegisterPopup = () => {
+  const openRegisterPopup = (employee = null) => {
+    setEmployeeToEdit(employee);
     setIsRegisterPopupOpen(true);
   };
 
   const closeRegisterPopup = () => {
+    setEmployeeToEdit(null);
     setIsRegisterPopupOpen(false);
   };
 
@@ -168,14 +171,6 @@ export default function AdminDashboard() {
                 aria-label="Add Employee"
               >
                 Add Employee
-              </button>
-              <button
-                className="remove-employee-button"
-                onClick={handleRemoveEmployee}
-                aria-label="Remove Employee"
-                disabled={!selectedEmployee}
-              >
-                Remove Employee
               </button>
             </>
           ) : (
@@ -303,7 +298,7 @@ export default function AdminDashboard() {
         {/* Employee Details Modal */} 
         {selectedEmployee && (
           <div className="modal-overlay" onClick={handleCloseDetails}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
               <button onClick={handleCloseDetails} className="modal-close-button"><div>&#10006;</div></button>
               <h3>{selectedEmployee.name}</h3>
               <p><strong>Position:</strong> {selectedEmployee.position}</p>
@@ -312,6 +307,25 @@ export default function AdminDashboard() {
               <p><strong>Department:</strong> {selectedEmployee.department}</p>
               <p><strong>Location:</strong> {selectedEmployee.location}</p>
               <p><strong>Joining Date:</strong> {selectedEmployee.joiningDate}</p>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: '10px' }}>
+                <button 
+                  onClick={() => {
+                    openRegisterPopup(selectedEmployee);
+                    setSelectedEmployee(null);
+                  }} 
+                  className="modal-edit-button"
+                  style={{ padding: '5px 10px', cursor: 'pointer' }}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={handleRemoveEmployee}
+                  className="modal-remove-button"
+                  style={{ padding: '5px 10px', cursor: 'pointer' }}
+                >
+                  Remove
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -321,7 +335,7 @@ export default function AdminDashboard() {
           <div className="modal-overlay" onClick={closeRegisterPopup}>
         <div className="modal-content popup-card" onClick={e => e.stopPropagation()}>
           <button onClick={closeRegisterPopup} className="modal-close-button"><div>&#10006;</div></button>
-          <Register onClose={closeRegisterPopup} />
+          <Register onClose={closeRegisterPopup} employee={employeeToEdit} />
         </div>
           </div>
         )}

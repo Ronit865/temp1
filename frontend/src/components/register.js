@@ -1,20 +1,20 @@
 import { useState } from "react";
 import '../styles.css';
 
-export default function Register({ onClose }) {
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [position, setPosition] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [department, setDepartment] = useState("");
-  const [location, setLocation] = useState("");
-  const [joiningDate, setJoiningDate] = useState("");
+export default function Register({ onClose, employee }) {
+  const [username, setUsername] = useState(employee ? employee.user : "");
+  const [name, setName] = useState(employee ? employee.name : "");
+  const [position, setPosition] = useState(employee ? employee.position : "");
+  const [email, setEmail] = useState(employee ? employee.email : "");
+  const [phone, setPhone] = useState(employee ? employee.phone : "");
+  const [department, setDepartment] = useState(employee ? employee.department : "");
+  const [location, setLocation] = useState(employee ? employee.location : "");
+  const [joiningDate, setJoiningDate] = useState(employee ? employee.joiningDate : "");
 
   const handleRegister = async (e) => {
     e.preventDefault();
     const formData = {
-      id: Date.now(),
+      id: employee ? employee._id : Date.now(),
       user: username,
       name,
       position,
@@ -26,8 +26,8 @@ export default function Register({ onClose }) {
     };
 
     try {
-      const response = await fetch('/api/employees', {
-        method: 'POST',
+      const response = await fetch(employee ? `/api/employees/${employee._id}` : '/api/employees', {
+        method: employee ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -37,25 +37,27 @@ export default function Register({ onClose }) {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Registration successful!');
-        // Clear form fields
-        setUsername("");
-        setName("");
-        setPosition("");
-        setEmail("");
-        setPhone("");
-        setDepartment("");
-        setLocation("");
-        setJoiningDate("");
+        alert(employee ? 'Update successful!' : 'Registration successful!');
+        // Clear form fields only if new registration
+        if (!employee) {
+          setUsername("");
+          setName("");
+          setPosition("");
+          setEmail("");
+          setPhone("");
+          setDepartment("");
+          setLocation("");
+          setJoiningDate("");
+        }
         if (onClose) {
           onClose();
         }
       } else {
-        alert('Registration failed: ' + data.message);
+        alert((employee ? 'Update' : 'Registration') + ' failed: ' + data.message);
       }
     } catch (error) {
-      console.error('Error during registration:', error);
-      alert('An error occurred during registration. Please try again.');
+      console.error('Error during ' + (employee ? 'update' : 'registration') + ':', error);
+      alert('An error occurred during ' + (employee ? 'update' : 'registration') + '. Please try again.');
     }
   };
 
@@ -153,8 +155,8 @@ export default function Register({ onClose }) {
             />
           </div>
         </div>
-        <button type="submit">ADD</button>
-      </form>
-    </div>
+      <button type="submit">{employee ? "Update" : "Add"}</button>
+    </form>
+  </div>
   );
 }

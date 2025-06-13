@@ -1,42 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import jsPDF from 'jspdf';
 
 import '../EmployeeDashboardStyles.css';
 
-const projectProgressData = [
-  { name: 'Week 1', uv: 400 },
-  { name: 'Week 2', uv: 300 },
-  { name: 'Week 3', uv: 500 },
-  { name: 'Week 4', uv: 200 },
-  { name: 'Week 5', uv: 278 },
-  { name: 'Week 6', uv: 189 },
-];
-
-const teamProgressData = [
-  { name: 'Customer', value: 4283 },
-  { name: 'Additions', value: 297 },
-];
-
-const performanceData = [
-  { name: '10', uv: 400 },
-  { name: '31', uv: 300 },
-  { name: '28', uv: 500 },
-  { name: '39', uv: 200 },
-  { name: '24', uv: 278 },
-  { name: '31', uv: 189 },
-];
-
-const barChartData = [
-  { name: 'Mo', uv: 200, pv: 240 },
-  { name: 'Tu', uv: 300, pv: 139 },
-  { name: 'We', uv: 250, pv: 980 },
-  { name: 'Th', uv: 278, pv: 390 },
-  { name: 'Fr', uv: 189, pv: 480 },
-  { name: 'Sa', uv: 239, pv: 380 },
-  { name: 'Su', uv: 349, pv: 430 },
-];
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -131,8 +99,8 @@ export default function EmployeeDashboard() {
             <button className="emp-btn emp-btn-secondary" onClick={handleLogout}>Logout</button>
           </div>
         </header>
-        <main className="emp-dashboard-main-content">
-          <section className="emp-employee-details-cards">
+        <main className="emp-dashboard-main-content" style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
+          <section className="emp-employee-details-cards" style={{ flex: 1 }}>
             <h3>Employee Details</h3>
             <div className="emp-employee-cards-container">
               <div className="emp-card emp-employee-card">
@@ -164,69 +132,38 @@ export default function EmployeeDashboard() {
                 <p>{new Date(employee.joiningDate).toLocaleDateString()}</p>
               </div>
             </div>
-          </section>
-          <section className="emp-bottom-section">
-            <div className="emp-bar-chart-container">
-              <h3>Weekly Activity</h3>
-              <ResponsiveContainer width="100%" height={200}>
-                <BarChart data={barChartData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="uv" fill="#2962ff" />
-                  <Bar dataKey="pv" fill="#82ca9d" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="emp-employee-status-table">
-              <h3>Performance Chart</h3>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={performanceData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="uv" stroke="#2962ff" />
-                </LineChart>
-              </ResponsiveContainer>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '1rem' }}>
+              <button className="emp-btn emp-btn-secondary" onClick={generatePreview}>
+                Preview Certificate
+              </button>
+              <button className="emp-btn emp-btn-primary" onClick={handleDownloadClick}>
+                Download Internship Certificate
+              </button>
             </div>
           </section>
-          <section className="emp-charts-section">
-            <section className="certificate-preview-section">
-              <div className="emp-card emp-employee-card emp-certificate-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 2rem', margin:'-6px 0', maxWidth: '350px' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  <button className="emp-btn emp-btn-secondary" onClick={generatePreview}>
-                    Preview Certificate
-                  </button>
-                  <button className="emp-btn emp-btn-primary" onClick={handleDownloadClick}>
-                    Download Internship Certificate
-                  </button>
+          <section className="certificate-preview-section" style={{ flex: 1 }}>
+            <div className='Priviewcard' style={{ maxWidth: '100%', marginLeft: '0' }}>
+              {showPreview ? (
+                <div className="emp-certificate-preview" >
+                  <h1 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: '22px' }}>Internship Certificate</h1>
+                  <p style={{ fontSize: '14px', marginBottom: '10px' }}>This is to certify that</p>
+                  <p style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>{employee.name}</p>
+                  <p style={{ fontSize: '14px', marginBottom: '10px' }}>has successfully completed the internship as a</p>
+                  <p style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px' }}>{employee.position}</p>
+                  <p style={{ fontSize: '14px', marginBottom: '5px' }}>Joining Date: <strong>{new Date(employee.joiningDate).toLocaleDateString()}</strong></p>
+                  <p style={{ fontSize: '14px', marginBottom: '5px' }}>Department: <strong>{employee.department}</strong></p>
+                  <p style={{ fontSize: '14px', marginTop: '15px', marginBottom: '15px' }}>We wish them all the best in their future endeavors.</p>
+                  <p style={{ fontSize: '14px' }}>Date: <strong>{new Date().toLocaleDateString()}</strong></p>
+                  <p style={{ textAlign: 'right', marginTop: '30px', fontSize: '9px' }}>
+                    Authorized Signature<br />
+                    <span style={{ display: 'inline-block', borderBottom: '1px solid #000', width: '75px', marginTop: '3px' }}></span>
+                  </p>
                 </div>
-              </div>
-              <div className='Priviewcard' style={{ maxWidth: '300px', marginLeft: '20px' }}>
-                {showPreview ? (
-                  <div className="emp-certificate-preview" >
-                    <h1 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: '16px' }}>Internship Certificate</h1>
-                    <p style={{ fontSize: '10px', marginBottom: '10px' }}>This is to certify that</p>
-                    <p style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'center' }}>{employee.name}</p>
-                    <p style={{ fontSize: '10px', marginBottom: '10px', textAlign: 'center' }}>has successfully completed the internship as a</p>
-                    <p style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'center' }}>{employee.position}</p>
-                    <p style={{ fontSize: '9px', marginBottom: '5px' }}>Joining Date: <strong>{new Date(employee.joiningDate).toLocaleDateString()}</strong></p>
-                    <p style={{ fontSize: '9px', marginBottom: '5px' }}>Department: <strong>{employee.department}</strong></p>
-                    <p style={{ fontSize: '9px', marginTop: '15px', marginBottom: '15px' }}>We wish them all the best in their future endeavors.</p>
-                    <p style={{ fontSize: '9px' }}>Date: <strong>{new Date().toLocaleDateString()}</strong></p>
-                    <p style={{ textAlign: 'right', marginTop: '30px', fontSize: '9px' }}>
-                      Authorized Signature<br />
-                      <span style={{ display: 'inline-block', borderBottom: '1px solid #000', width: '75px', marginTop: '3px' }}></span>
-                    </p>
-                  </div>
-                ) : (
-                  <p>Preview will be shown here</p>
-                )}
-              </div>
-            </section>
-          </section> 
+              ) : (
+                <p>Preview will be shown here</p>
+              )}
+            </div>
+          </section>
         </main>
       </div>
     </div>
