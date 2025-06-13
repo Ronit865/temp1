@@ -63,7 +63,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/employees/${selectedEmployee._id}`, {
+      const response = await fetch(`https://z59g0pdh-5000.inc1.devtunnels.ms/api/employees/${selectedEmployee._id}`, {
         method: 'DELETE',
       });
       const data = await response.json();
@@ -85,7 +85,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function fetchEmployees() {
       try {
-        const response = await fetch('http://localhost:5000/api/employees');
+        const response = await fetch('https://z59g0pdh-5000.inc1.devtunnels.ms/api/employees');
         const data = await response.json();
         console.log('Fetched employees data:', data);
         if (data.success) {

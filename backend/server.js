@@ -4,7 +4,7 @@ const cors = require('cors');
 const User = require('./models/User.js');
 const Employee = require('./models/Employee.js');
 // const mongoURI= 'mongodb+srv://rajdhimmar4:Ronit_865@cluster0.yfl8iyy.mongodb.net/EmployeeCreads'
-const mongoURI= 'mongodb+srv://mlgos:Mlgos%4018@exampledb.nocp3qk.mongodb.net/EmployeeCreds'
+const mongoURI= 'mongodb+srv://appiflyinfotech:dZNWYc3vlLHD5ztC@cluster0.b3pdx.mongodb.net/EmployeeCreds'
 require('dotenv').config({
   path:'./.env'
 });
@@ -18,7 +18,7 @@ app.use(express.json());
 
 // MongoDB connection
 // const mongoURI = process.env.MONGO_URI || 'cluster0.yfl8iyy.mongodb.net/EmployeeCreds';
-const DB_NAME = 'EmployeeCreds';
+// const DB_NAME = 'EmployeeCreds';
 mongoose.connect(`${mongoURI}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
