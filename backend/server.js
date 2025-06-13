@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/EmployeeCreds';
+const mongoURI = process.env.MONGO_URI || 'cluster0.yfl8iyy.mongodb.net/EmployeeCreds';
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
