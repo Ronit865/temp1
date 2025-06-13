@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./models/User.js');
 const Employee = require('./models/Employee.js');
-
-require('dotenv').config();
+// const mongoURI= 'mongodb+srv://rajdhimmar4:Ronit_865@cluster0.yfl8iyy.mongodb.net/EmployeeCreads'
+const mongoURI= 'mongodb+srv://mlgos:Mlgos%4018@exampledb.nocp3qk.mongodb.net/EmployeeCreds'
+require('dotenv').config({
+  path:'./.env'
+});
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,9 +17,9 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-const mongoURI = process.env.MONGO_URI || 'cluster0.yfl8iyy.mongodb.net/EmployeeCreds';
-
-mongoose.connect(mongoURI, {
+// const mongoURI = process.env.MONGO_URI || 'cluster0.yfl8iyy.mongodb.net/EmployeeCreds';
+const DB_NAME = 'EmployeeCreds';
+mongoose.connect(`${mongoURI}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
