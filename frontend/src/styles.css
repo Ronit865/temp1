@@ -1437,6 +1437,7 @@ button:hover {
 
 @media (max-width: 768px) {
   .sidebar {
+    z-index: 1;
     padding: 10px;
   }
 
@@ -1481,8 +1482,22 @@ button:hover {
 @media (max-width: 480px) {
   .sidebar {
     width: 100%;
+    z-index: 1500;
     padding: 50px 5px 5px 5px; /* increased top padding more for small devices */
   }
+  @media (max-width: 767px) {
+  body, .main-content {
+    overflow-y: auto;
+    height: auto;
+  }
+  .sidebar {
+    position: fixed;
+    z-index: 1;
+    /* Sidebar should not cover the whole screen unless intended */
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
 
   .sidebar.closed {
     width: 0 !important;
