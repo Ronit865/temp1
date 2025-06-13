@@ -134,6 +134,39 @@ app.post('/api/employees', async (req, res) => {
   }
 });
 
+app.put('/api/employees/:id', async (req, res) => {
+  const employeeId = req.params.id;
+  const { user, joiningDate, name, position, email, phone, department, location } = req.body;
+
+  if (!user || !joiningDate || !name || !position || !email || !phone || !department || !location) {
+    return res.status(400).json({ success: false, message: 'All fields are required' });
+  }
+
+  try {
+    const updatedEmployee = await Employee.findByIdAndUpdate(
+      employeeId,
+      { user, joiningDate, name, position, email, phone, department, location },
+      { new: true }
+    );
+
+    if (!updatedEmployee) {
+      return res.status(404).json({ success: false, message: 'Employee not found' });
+    }
+
+    // Also update user in users collection
+    const updatedUser = await User.findOneAndUpdate(
+      { user: updatedEmployee.user },
+      { user, joiningDate },
+      { new: true }
+    );
+
+    res.json({ success: true, message: 'Employee updated successfully' });
+  } catch (error) {
+    console.error('Error updating employee:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 app.delete('/api/employees/:id', async (req, res) => {
   const employeeId = req.params.id;
 
