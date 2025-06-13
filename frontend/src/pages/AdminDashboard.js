@@ -63,7 +63,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      const response = await fetch(`https://z59g0pdh-5000.inc1.devtunnels.ms/api/employees/${selectedEmployee._id}`, {
+      const response = await fetch(`/api/employees/${selectedEmployee._id}`, {
         method: 'DELETE',
       });
       const data = await response.json();
