@@ -44,6 +44,7 @@ const employeeStatus = [
 ];
 
 import Register from '../components/register';
+import Add from '../components/add';
 
 export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -51,6 +52,7 @@ export default function AdminDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [employees, setEmployees] = useState([]);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
+  const [isAddPopupOpen, setIsAddPopupOpen] = useState(false);
   const [employeeToEdit, setEmployeeToEdit] = useState(null);
 
   const handleRemoveEmployee = async () => {
@@ -126,6 +128,13 @@ export default function AdminDashboard() {
     setEmployeeToEdit(null);
     setIsRegisterPopupOpen(false);
   };
+  const openAddPopup = (employee = null) => {
+    setIsRegisterPopupOpen(true);
+  };
+
+  const closeAddPopup = () => {
+    setIsRegisterPopupOpen(false);
+  };
 
   return (
     <div className="dashboard-content">
@@ -167,7 +176,7 @@ export default function AdminDashboard() {
               </div>
                <button
                 className="add-employee-button"
-                onClick={openRegisterPopup}
+                onClick={openAddPopup}
                 aria-label="Add Employee"
               >
                 Add Employee
@@ -329,18 +338,25 @@ export default function AdminDashboard() {
             </div>
           </div>
         )}
-
         {/* Register Popup Modal */}
         {isRegisterPopupOpen && (
-          <div className="modal-overlay" onClick={closeRegisterPopup}>
-        <div className="modal-content popup-card" onClick={e => e.stopPropagation()}>
-          <button onClick={closeRegisterPopup} className="modal-close-button"><div>&#10006;</div></button>
-          <Register onClose={closeRegisterPopup} employee={employeeToEdit} />
+          <div className="modal-overlay" onClick={closeAddPopup}>
+            <div className="modal-content popup-card" onClick={e => e.stopPropagation()}>
+            <button onClick={closeAddPopup} className="modal-close-button"><div>&#10006;</div></button>
+            <Register onClose={closeAddPopup} />
+          </div>
+          </div>
+        )}
+            {/* Register Popup Modal */}
+            {isRegisterPopupOpen && (
+            <div className="modal-overlay" onClick={closeRegisterPopup}>
+            <div className="modal-content popup-card" onClick={e => e.stopPropagation()}>
+            <button onClick={closeRegisterPopup} className="modal-close-button"><div>&#10006;</div></button>
+            <Register onClose={closeRegisterPopup} employee={employeeToEdit} />
         </div>
           </div>
         )}
-
       </div>
     </div>
   );
-}
+};
