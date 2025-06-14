@@ -1,9 +1,11 @@
 /* General resets and base styles */
-body, html, #root {
+body,
+html,
+#root {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f0f4f9;
   color: #333;
 }
@@ -19,7 +21,7 @@ body, html, #root {
 .emp-sidebar {
   width: 220px;
   background: #fff;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -83,7 +85,7 @@ body, html, #root {
 }
 
 .emp-btn-primary {
-  background: #4682B4; /* steel blue - darker */
+  background: #4682b4; /* steel blue - darker */
   color: #fff;
 }
 
@@ -92,7 +94,7 @@ body, html, #root {
 }
 
 .emp-btn-secondary {
-  background: #4682B4; /* steel blue - darker */
+  background: #4682b4; /* steel blue - darker */
   color: #fff;
 }
 
@@ -116,7 +118,7 @@ body, html, #root {
   align-items: center;
   padding: 15px 30px;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -157,10 +159,13 @@ body, html, #root {
 
 /* Main content area */
 .emp-dashboard-main-content {
+  display: flex;
+  flex-direction: column;
   padding: 30px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 25px;
+  gap: 40px;
+  /* display: grid; */
+  /* grid-template-columns: repeat(3, 1fr); */
+  /* grid-gap: 25px; */
 }
 
 /* Cards */
@@ -293,6 +298,12 @@ body, html, #root {
   box-shadow: 0 4px 12px rgba(74, 20, 140, 0.1);
 }
 
+.emp-certificate-preview {
+  background-color: white;
+  border: 1px solid #d4d4d4;
+  padding: 40px 21px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .emp-dashboard-main-content {
@@ -416,7 +427,7 @@ body, html, #root {
   font-family: serif;
   box-sizing: border-box;
   /* overflow-y: auto; */
-  /* aspect-ratio: 1 / 1.414; */
+  aspect-ratio: 1 / 1.414;
 }
 
 .Priviewcard {
@@ -440,4 +451,18 @@ body, html, #root {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .emp-dashboard-main-content {
+    flex-direction: column !important;
+  }
+  .certificate-preview-section {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+  .Priviewcard {
+    width: 100% !important;
+    margin-top: 1rem;
+  }
 }
