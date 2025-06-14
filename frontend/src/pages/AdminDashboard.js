@@ -356,6 +356,15 @@ export default function AdminDashboard() {
         </div>
           </div>
         )}
+        {/* Add Popup Modal */}
+        {isAddPopupOpen && (
+          <div className="modal-overlay" onClick={closeAddPopup}>
+            <div className="modal-content popup-card" onClick={e => e.stopPropagation()}>
+              <button onClick={closeAddPopup} className="modal-close-button"><div>&#10006;</div></button>
+              <Add onClose={closeAddPopup} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
