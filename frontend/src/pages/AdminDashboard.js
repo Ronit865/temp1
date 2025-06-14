@@ -129,11 +129,11 @@ export default function AdminDashboard() {
     setIsRegisterPopupOpen(false);
   };
   const openAddPopup = (employee = null) => {
-    setIsRegisterPopupOpen(true);
+    setIsAddPopupOpen(true);
   };
 
   const closeAddPopup = () => {
-    setIsRegisterPopupOpen(false);
+    setIsAddPopupOpen(false);
   };
 
   return (
