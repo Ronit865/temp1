@@ -31,7 +31,17 @@ body, html, #root {
   padding: 0 20px 20px;
   border-bottom: 1px solid #eee;
 }
-
+@media (max-width: 768px) {
+  .emp-dashboard-main-content {
+    flex-direction: column;
+  }
+  .emp-employee-details-cards {
+    margin-bottom: 20px;
+  }
+  .certificate-preview-section {
+    margin-top: 20px;
+  }
+}
 .emp-logo {
   font-size: 28px;
   margin-bottom: 10px;

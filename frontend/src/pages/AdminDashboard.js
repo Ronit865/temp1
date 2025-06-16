@@ -200,6 +200,9 @@ export default function AdminDashboard() {
             <div className="user-profile" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png" alt="User Avatar" className="user-avatar" />
               <span className="user-name">Admin</span>
+              <button className="logout-button" onClick={() => window.location.href = 'https://6g4q637q-3000.inc1.devtunnels.ms/'} style={{ marginLeft: '10px', padding: '5px 10px', cursor: 'pointer' }}>
+                Logout
+              </button>
             </div>
           </div>
         </header>
