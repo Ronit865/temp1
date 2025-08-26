@@ -13,8 +13,15 @@ export default function Add({ onClose }) {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    
+    // Validation
+    if (!username || !name || !position || !email || !phone || !department || !location || !joiningDate) {
+      alert('Please fill in all fields');
+      return;
+    }
+
     const formData = {
-      id: Date.now(),
+      id: Date.now(), // Generate a unique ID
       user: username,
       name,
       position,
@@ -25,8 +32,10 @@ export default function Add({ onClose }) {
       joiningDate,
     };
 
+    console.log('Submitting form data:', formData);
+
     try {
-      const response = await fetch('http://localhost:5000/api/employees', {
+      const response = await fetch('/api/employees', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,10 +43,12 @@ export default function Add({ onClose }) {
         body: JSON.stringify(formData)
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
-      if (response.ok) {
-        alert('Registration successful!');
+      if (response.ok && data.success) {
+        alert('Employee added successfully!');
         // Clear form fields
         setUsername("");
         setName("");
@@ -50,8 +61,10 @@ export default function Add({ onClose }) {
         if (onClose) {
           onClose();
         }
+        // Refresh the page to show the new user
+        window.location.reload();
       } else {
-        alert('Registration failed: ' + data.message);
+        alert('Registration failed: ' + (data.message || 'Unknown error'));
       }
     } catch (error) {
       console.error('Error during registration:', error);
@@ -62,25 +75,25 @@ export default function Add({ onClose }) {
   return (
     <div className="register-container-center">
       <form onSubmit={handleRegister} className="form-card" noValidate>
-        <h2>NEW Employee Details</h2>
+        <h2>Add New Employee</h2>
         <div className="form-grid">
           <div className="form-group">
-            <label htmlFor="username">User</label>
+            <label htmlFor="username">Username</label>
             <input
-              id="user"
+              id="username"
               type="text"
-              placeholder="Enter your username"
+              placeholder="Enter username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Full Name</label>
             <input
               id="name"
               type="text"
-              placeholder="Enter your name"
+              placeholder="Enter full name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -91,7 +104,7 @@ export default function Add({ onClose }) {
             <input
               id="position"
               type="text"
-              placeholder="Enter your position"
+              placeholder="Enter position"
               value={position}
               onChange={(e) => setPosition(e.target.value)}
               required
@@ -102,7 +115,7 @@ export default function Add({ onClose }) {
             <input
               id="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -113,7 +126,7 @@ export default function Add({ onClose }) {
             <input
               id="phone"
               type="tel"
-              placeholder="Enter your phone number"
+              placeholder="Enter phone number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
@@ -124,7 +137,7 @@ export default function Add({ onClose }) {
             <input
               id="department"
               type="text"
-              placeholder="Enter your department"
+              placeholder="Enter department"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
               required
@@ -135,7 +148,7 @@ export default function Add({ onClose }) {
             <input
               id="location"
               type="text"
-              placeholder="Enter your location"
+              placeholder="Enter location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               required
@@ -146,14 +159,13 @@ export default function Add({ onClose }) {
             <input
               id="joiningDate"
               type="date"
-              placeholder="yyyy-mm-dd"
               value={joiningDate}
               onChange={(e) => setJoiningDate(e.target.value)}
               required
             />
           </div>
         </div>
-        <button type="submit">ADD</button>
+        <button type="submit" className="submit-button">ADD EMPLOYEE</button>
       </form>
     </div>
   );

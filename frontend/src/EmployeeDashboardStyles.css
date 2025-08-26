@@ -178,6 +178,26 @@ html,
   /* grid-gap: 25px; */
 }
 
+.emp-dashboard-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  height: 100%;
+  align-items: flex-start;
+}
+
+.emp-employee-details-cards {
+  flex: 1;
+  max-width: 50%;
+}
+
+.certificate-preview-section {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Cards */
 .emp-card {
   background: #fff;
@@ -396,20 +416,23 @@ html,
 }
 
 .emp-employee-cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  max-width: 100%;
 }
 
 .emp-employee-card {
   background-color: #e8eaf6;
   border-radius: 12px;
   padding: 15px 20px;
-  flex: 1 1 200px;
   box-shadow: 0 2px 8px rgba(74, 20, 140, 0.15);
   color: #1a237e;
   transition: background-color 0.3s ease;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .emp-employee-card h4 {
@@ -427,6 +450,32 @@ html,
   background-color: #d1c4e9;
   cursor: default;
 }
+
+/* Responsive design for employee cards */
+@media (max-width: 1024px) {
+  .emp-dashboard-content-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .emp-employee-details-cards,
+  .certificate-preview-section {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .emp-employee-cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .emp-employee-cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 .certificate-preview {
   border: 2px solid #000;
   padding: 20px;

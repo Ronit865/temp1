@@ -186,6 +186,67 @@ app.delete('/api/employees/:id', async (req, res) => {
   }
 });
 
+// User role management endpoints
+app.put('/api/users/:username/role', async (req, res) => {
+  const { username } = req.params;
+  const { role } = req.body;
+
+  if (!role || !['admin', 'employee'].includes(role)) {
+    return res.status(400).json({ success: false, message: 'Valid role (admin or employee) is required' });
+  }
+
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { user: username },
+      { role },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    res.json({ success: true, message: 'User role updated successfully', user: updatedUser });
+  } catch (error) {
+    console.error('Error updating user role:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+app.delete('/api/users/:username', async (req, res) => {
+  const { username } = req.params;
+  console.log('DELETE request received for username:', username);
+
+  try {
+    const deletedUser = await User.findOneAndDelete({ user: username });
+    console.log('Deleted user from User collection:', deletedUser);
+
+    if (!deletedUser) {
+      console.log('User not found in database');
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    // Also remove from employees collection if exists
+    const deletedEmployee = await Employee.deleteOne({ user: username });
+    console.log('Deleted from Employee collection:', deletedEmployee);
+
+    res.json({ success: true, message: 'User removed successfully' });
+  } catch (error) {
+    console.error('Error removing user:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Debug endpoint to see all users
+app.get('/api/debug/users', async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

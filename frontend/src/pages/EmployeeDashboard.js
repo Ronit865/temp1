@@ -99,71 +99,73 @@ export default function EmployeeDashboard() {
             <button className="emp-btn emp-btn-secondary" onClick={handleLogout}>Logout</button>
           </div>
         </header>
-        <main className="emp-dashboard-main-content" >
-          <section className="emp-employee-details-cards" >
-            <h3>Employee Details</h3>
-            <div className="emp-employee-cards-container">
-              <div className="emp-card emp-employee-card">
-                <h4>Name</h4>
-                <p>{employee.name}</p>
-              </div>
-              <div className="emp-card emp-employee-card">
-                <h4>Position</h4>
-                <p>{employee.position}</p>
-              </div>
-              <div className="emp-card emp-employee-card">
-                <h4>Email</h4>
-                <p>{employee.email}</p>
-              </div>
-              <div className="emp-card emp-employee-card">
-                <h4>Phone</h4>
-                <p>{employee.phone}</p>
-              </div>
-              <div className="emp-card emp-employee-card">
-                <h4>Department</h4>
-                <p>{employee.department}</p>
-              </div>
-              <div className="emp-card emp-employee-card">
-                <h4>Location</h4>
-                <p>{employee.location}</p>
-              </div>
-              <div className="emp-card emp-employee-card">
-                <h4>Joining Date</h4>
-                <p>{new Date(employee.joiningDate).toLocaleDateString()}</p>
-              </div>
-            </div>
-          </section>
-          <section className="certificate-preview-section" style={{ flex: 1 }}>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '1rem' }}>
-              <button className="emp-btn emp-btn-secondary" onClick={generatePreview}>
-                Preview Certificate
-              </button>
-              <button className="emp-btn emp-btn-primary" onClick={handleDownloadClick}>
-                Download Internship Certificate
-              </button>
-            </div>
-            <div className='Priviewcard' >
-              {showPreview ? (
-                <div className="emp-certificate-preview" >
-                  <h1 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: '22px' }}>Internship Certificate</h1>
-                  <p style={{ fontSize: '14px', marginBottom: '10px' }}>This is to certify that</p>
-                  <p style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>{employee.name}</p>
-                  <p style={{ fontSize: '14px', marginBottom: '10px' }}>has successfully completed the internship as a</p>
-                  <p style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px' }}>{employee.position}</p>
-                  <p style={{ fontSize: '14px', marginBottom: '5px' }}>Joining Date: <strong>{new Date(employee.joiningDate).toLocaleDateString()}</strong></p>
-                  <p style={{ fontSize: '14px', marginBottom: '5px' }}>Department: <strong>{employee.department}</strong></p>
-                  <p style={{ fontSize: '14px', marginTop: '15px', marginBottom: '15px' }}>We wish them all the best in their future endeavors.</p>
-                  <p style={{ fontSize: '14px' }}>Date: <strong>{new Date().toLocaleDateString()}</strong></p>
-                  <p style={{ textAlign: 'right', marginTop: '30px', fontSize: '9px' }}>
-                    Authorized Signature<br />
-                    <span style={{ display: 'inline-block', borderBottom: '1px solid #000', width: '75px', marginTop: '3px' }}></span>
-                  </p>
+        <main className="emp-dashboard-main-content">
+          <div className="emp-dashboard-content-wrapper">
+            <section className="emp-employee-details-cards">
+              <h3>Employee Details</h3>
+              <div className="emp-employee-cards-container">
+                <div className="emp-card emp-employee-card">
+                  <h4>Name</h4>
+                  <p>{employee.name}</p>
                 </div>
-              ) : (
-                <p>Preview will be shown here</p>
-              )}
-            </div>
+                <div className="emp-card emp-employee-card">
+                  <h4>Position</h4>
+                  <p>{employee.position}</p>
+                </div>
+                <div className="emp-card emp-employee-card">
+                  <h4>Email</h4>
+                  <p>{employee.email}</p>
+                </div>
+                <div className="emp-card emp-employee-card">
+                  <h4>Phone</h4>
+                  <p>{employee.phone}</p>
+                </div>
+                <div className="emp-card emp-employee-card">
+                  <h4>Department</h4>
+                  <p>{employee.department}</p>
+                </div>
+                <div className="emp-card emp-employee-card">
+                  <h4>Location</h4>
+                  <p>{employee.location}</p>
+                </div>
+                <div className="emp-card emp-employee-card">
+                  <h4>Joining Date</h4>
+                  <p>{new Date(employee.joiningDate).toLocaleDateString()}</p>
+                </div>
+              </div>
+            </section>
+            <section className="certificate-preview-section">
+              <div className='Priviewcard' >
+                {showPreview ? (
+                  <div className="emp-certificate-preview" >
+                    <h1 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: '22px' }}>Internship Certificate</h1>
+                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>This is to certify that</p>
+                    <p style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>{employee.name}</p>
+                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>has successfully completed the internship as a</p>
+                    <p style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px' }}>{employee.position}</p>
+                    <p style={{ fontSize: '14px', marginBottom: '5px' }}>Joining Date: <strong>{new Date(employee.joiningDate).toLocaleDateString()}</strong></p>
+                    <p style={{ fontSize: '14px', marginBottom: '5px' }}>Department: <strong>{employee.department}</strong></p>
+                    <p style={{ fontSize: '14px', marginTop: '15px', marginBottom: '15px' }}>We wish them all the best in their future endeavors.</p>
+                    <p style={{ fontSize: '14px' }}>Date: <strong>{new Date().toLocaleDateString()}</strong></p>
+                    <p style={{ textAlign: 'right', marginTop: '30px', fontSize: '9px' }}>
+                      Authorized Signature<br />
+                      <span style={{ display: 'inline-block', borderBottom: '1px solid #000', width: '75px', marginTop: '3px' }}></span>
+                    </p>
+                  </div>
+                ) : (
+                  <p>Preview will be shown here</p>
+                )}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '1rem' }}>
+                <button className="emp-btn emp-btn-secondary" onClick={generatePreview}>
+                  Preview Certificate
+                </button>
+                <button className="emp-btn emp-btn-primary" onClick={handleDownloadClick}>
+                  Download Internship Certificate
+                </button>
+              </div>
           </section>
+          </div>
         </main>
       </div>
     </div>
