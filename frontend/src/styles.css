@@ -88,9 +88,9 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://static.vecteezy.com/system/resources/previews/000/172/437/original/navy-uniform-camouflage-pattern-vector.jpg') no-repeat center center fixed;
+  /* background: url('https://media.istockphoto.com/id/2074559294/vector/black-and-white-noisy-texture-grainy-background-monochrome-minimal-grunge-banner-header.jpg?s=612x612&w=0&k=20&c=i3Um22o6Fhz1ZpfWlzmKJaRbCEoeEF0PuaV2hfUVq08=') no-repeat center center fixed; */
   background-size: cover;
-  filter: blur(50px);
+  /* filter: blur(50px); */
   z-index: -1;
 }
 
